@@ -5,15 +5,15 @@ import '../../../config/app_config.dart';
 
 class HackathonWizardProvider with ChangeNotifier {
   final HttpService _httpService = HttpService();
-  
+
   // Wizard state
   int _currentStep = 0;
   bool _isLoading = false;
   String? _error;
-  
+
   // Form data
   HackathonModel? _hackathon;
-  
+
   // Form field controllers data
   String _name = '';
   String _description = '';
@@ -33,7 +33,7 @@ class HackathonWizardProvider with ChangeNotifier {
   bool get isLoading => _isLoading;
   String? get error => _error;
   HackathonModel? get hackathon => _hackathon;
-  
+
   // Form data getters
   String get name => _name;
   String get description => _description;
@@ -49,10 +49,16 @@ class HackathonWizardProvider with ChangeNotifier {
   String get registrationFeeJustification => _registrationFeeJustification;
 
   // Step validation
-  bool get isStep1Valid => _name.isNotEmpty && _description.isNotEmpty && _type.isNotEmpty;
-  bool get isStep2Valid => _startDate != null && _endDate != null && _prizePoolDetails.isNotEmpty;
-  bool get isStep3Valid => _rules.isNotEmpty && _minTeamSize > 0 && _maxTeamSize > 0 && _minTeamSize <= _maxTeamSize;
-  
+  bool get isStep1Valid =>
+      _name.isNotEmpty && _description.isNotEmpty && _type.isNotEmpty;
+  bool get isStep2Valid =>
+      _startDate != null && _endDate != null && _prizePoolDetails.isNotEmpty;
+  bool get isStep3Valid =>
+      _rules.isNotEmpty &&
+      _minTeamSize > 0 &&
+      _maxTeamSize > 0 &&
+      _minTeamSize <= _maxTeamSize;
+
   bool get canProceedToNextStep {
     switch (_currentStep) {
       case 0:
@@ -178,8 +184,8 @@ class HackathonWizardProvider with ChangeNotifier {
       minTeamSize: _minTeamSize,
       maxTeamSize: _maxTeamSize,
       registrationFee: _registrationFee,
-      registrationFeeJustification: _registrationFeeJustification.isNotEmpty 
-          ? _registrationFeeJustification 
+      registrationFeeJustification: _registrationFeeJustification.isNotEmpty
+          ? _registrationFeeJustification
           : null,
     );
   }
@@ -192,7 +198,7 @@ class HackathonWizardProvider with ChangeNotifier {
     }
 
     _setLoading(true);
-    
+
     try {
       final hackathonData = _createHackathonModel();
       final response = await _httpService.post<Map<String, dynamic>>(
@@ -235,7 +241,8 @@ class HackathonWizardProvider with ChangeNotifier {
     _minTeamSize = hackathon.minTeamSize;
     _maxTeamSize = hackathon.maxTeamSize;
     _registrationFee = hackathon.registrationFee;
-    _registrationFeeJustification = hackathon.registrationFeeJustification ?? '';
+    _registrationFeeJustification =
+        hackathon.registrationFeeJustification ?? '';
     notifyListeners();
   }
 
@@ -245,7 +252,7 @@ class HackathonWizardProvider with ChangeNotifier {
     _isLoading = false;
     _error = null;
     _hackathon = null;
-    
+
     _name = '';
     _description = '';
     _type = '';
@@ -258,7 +265,7 @@ class HackathonWizardProvider with ChangeNotifier {
     _maxTeamSize = AppConfig.maxTeamSize;
     _registrationFee = null;
     _registrationFeeJustification = '';
-    
+
     notifyListeners();
   }
 

@@ -26,9 +26,9 @@ class User {
       name: json['name'] as String,
       role: json['role'] as String,
       isActive: json['is_active'] as bool? ?? true,
-      lastLoginAt: json['last_login_at'] != null 
-        ? DateTime.parse(json['last_login_at'] as String)
-        : null,
+      lastLoginAt: json['last_login_at'] != null
+          ? DateTime.parse(json['last_login_at'] as String)
+          : null,
       createdAt: DateTime.parse(json['created_at'] as String),
       updatedAt: DateTime.parse(json['updated_at'] as String),
     );

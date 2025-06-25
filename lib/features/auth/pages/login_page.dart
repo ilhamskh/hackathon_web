@@ -20,10 +20,7 @@ class LoginPage extends StatelessWidget {
                 children: [
                   const Text(
                     'Admin Login',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 32),
                   const TextField(
@@ -44,9 +41,9 @@ class LoginPage extends StatelessWidget {
                   BlocConsumer<AuthCubit, AuthState>(
                     listener: (context, state) {
                       if (state is AuthError) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text(state.message)),
-                        );
+                        ScaffoldMessenger.of(
+                          context,
+                        ).showSnackBar(SnackBar(content: Text(state.message)));
                       }
                     },
                     builder: (context, state) {
@@ -58,9 +55,9 @@ class LoginPage extends StatelessWidget {
                               : () {
                                   // TODO: Get email and password from controllers
                                   context.read<AuthCubit>().login(
-                                        'admin@example.com',
-                                        'password',
-                                      );
+                                    'admin@example.com',
+                                    'password',
+                                  );
                                 },
                           child: state is AuthLoading
                               ? const CircularProgressIndicator()

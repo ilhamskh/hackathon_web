@@ -101,8 +101,13 @@ class AppTheme {
           borderRadius: BorderRadius.circular(12),
           borderSide: const BorderSide(color: AppColors.error),
         ),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-        labelStyle: AppTextStyles.labelMedium.copyWith(color: AppColors.textSecondary),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 16,
+        ),
+        labelStyle: AppTextStyles.labelMedium.copyWith(
+          color: AppColors.textSecondary,
+        ),
         hintStyle: AppTextStyles.bodyMedium.copyWith(color: AppColors.grey400),
       ),
       dividerTheme: const DividerThemeData(
@@ -143,10 +148,7 @@ class AppTheme {
         labelLarge: AppTextStyles.labelLarge,
         labelMedium: AppTextStyles.labelMedium,
         labelSmall: AppTextStyles.labelSmall,
-      ).apply(
-        bodyColor: AppColors.textDark,
-        displayColor: AppColors.textDark,
-      ),
+      ).apply(bodyColor: AppColors.textDark, displayColor: AppColors.textDark),
       appBarTheme: const AppBarTheme(
         elevation: 0,
         backgroundColor: AppColors.surfaceDark,
@@ -214,8 +216,13 @@ class AppTheme {
           borderRadius: BorderRadius.circular(12),
           borderSide: const BorderSide(color: AppColors.error),
         ),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-        labelStyle: AppTextStyles.labelMedium.copyWith(color: AppColors.textSecondaryDark),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 16,
+        ),
+        labelStyle: AppTextStyles.labelMedium.copyWith(
+          color: AppColors.textSecondaryDark,
+        ),
         hintStyle: AppTextStyles.bodyMedium.copyWith(color: AppColors.grey400),
       ),
       dividerTheme: const DividerThemeData(

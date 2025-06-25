@@ -80,7 +80,9 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       final isAuthenticated = await _httpService.isAuthenticated();
       if (isAuthenticated) {
-        final response = await _httpService.get<Map<String, dynamic>>('/auth/me');
+        final response = await _httpService.get<Map<String, dynamic>>(
+          '/auth/me',
+        );
         if (response.isSuccess) {
           final user = User.fromJson(response.data!);
           emit(AuthAuthenticated(user));

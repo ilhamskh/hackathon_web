@@ -88,7 +88,8 @@ class DashboardCubit extends Cubit<DashboardState> {
         ),
         RecentActivity(
           title: 'Event published',
-          description: 'Blockchain Summit is now live and accepting registrations',
+          description:
+              'Blockchain Summit is now live and accepting registrations',
           time: '1 hour ago',
           type: 'event',
         ),
@@ -106,11 +107,13 @@ class DashboardCubit extends Cubit<DashboardState> {
         ),
       ];
 
-      emit(DashboardLoaded(
-        stats: stats,
-        topHackathons: topHackathons,
-        recentActivities: activities,
-      ));
+      emit(
+        DashboardLoaded(
+          stats: stats,
+          topHackathons: topHackathons,
+          recentActivities: activities,
+        ),
+      );
     } catch (e) {
       emit(DashboardError('Failed to load dashboard data: ${e.toString()}'));
     }

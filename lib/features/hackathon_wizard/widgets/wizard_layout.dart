@@ -55,7 +55,10 @@ class WizardLayout extends StatelessWidget {
     );
   }
 
-  Widget _buildMobileLayout(BuildContext context, HackathonWizardProvider provider) {
+  Widget _buildMobileLayout(
+    BuildContext context,
+    HackathonWizardProvider provider,
+  ) {
     return Column(
       children: [
         _buildProgressIndicator(context, provider),
@@ -78,7 +81,10 @@ class WizardLayout extends StatelessWidget {
     );
   }
 
-  Widget _buildDesktopLayout(BuildContext context, HackathonWizardProvider provider) {
+  Widget _buildDesktopLayout(
+    BuildContext context,
+    HackathonWizardProvider provider,
+  ) {
     return Row(
       children: [
         // Sidebar with steps
@@ -108,7 +114,9 @@ class WizardLayout extends StatelessWidget {
                 const SizedBox(height: 24),
                 Container(
                   constraints: BoxConstraints(
-                    maxWidth: ResponsiveUtils.getResponsiveContainerWidth(context),
+                    maxWidth: ResponsiveUtils.getResponsiveContainerWidth(
+                      context,
+                    ),
                   ),
                   child: child,
                 ),
@@ -120,7 +128,10 @@ class WizardLayout extends StatelessWidget {
     );
   }
 
-  Widget _buildProgressIndicator(BuildContext context, HackathonWizardProvider provider) {
+  Widget _buildProgressIndicator(
+    BuildContext context,
+    HackathonWizardProvider provider,
+  ) {
     return Container(
       padding: const EdgeInsets.all(16),
       color: Theme.of(context).colorScheme.surface,
@@ -135,7 +146,9 @@ class WizardLayout extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: i <= provider.currentStep
                           ? Theme.of(context).colorScheme.primary
-                          : Theme.of(context).colorScheme.outline.withOpacity(0.3),
+                          : Theme.of(
+                              context,
+                            ).colorScheme.outline.withOpacity(0.3),
                       borderRadius: BorderRadius.circular(2),
                     ),
                   ),
@@ -156,7 +169,10 @@ class WizardLayout extends StatelessWidget {
     );
   }
 
-  Widget _buildStepsList(BuildContext context, HackathonWizardProvider provider) {
+  Widget _buildStepsList(
+    BuildContext context,
+    HackathonWizardProvider provider,
+  ) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Column(
@@ -170,14 +186,17 @@ class WizardLayout extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-          for (int i = 0; i < 3; i++)
-            _buildStepItem(context, provider, i),
+          for (int i = 0; i < 3; i++) _buildStepItem(context, provider, i),
         ],
       ),
     );
   }
 
-  Widget _buildStepItem(BuildContext context, HackathonWizardProvider provider, int step) {
+  Widget _buildStepItem(
+    BuildContext context,
+    HackathonWizardProvider provider,
+    int step,
+  ) {
     final isActive = step == provider.currentStep;
     final isCompleted = step < provider.currentStep;
     final isClickable = step <= provider.currentStep;
@@ -208,8 +227,8 @@ class WizardLayout extends StatelessWidget {
                   color: isCompleted
                       ? Theme.of(context).colorScheme.primary
                       : isActive
-                          ? Theme.of(context).colorScheme.primary.withOpacity(0.2)
-                          : Theme.of(context).colorScheme.outline.withOpacity(0.3),
+                      ? Theme.of(context).colorScheme.primary.withOpacity(0.2)
+                      : Theme.of(context).colorScheme.outline.withOpacity(0.3),
                 ),
                 child: Center(
                   child: isCompleted
@@ -220,12 +239,15 @@ class WizardLayout extends StatelessWidget {
                         )
                       : Text(
                           '${step + 1}',
-                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: isActive
-                                ? Theme.of(context).colorScheme.primary
-                                : Theme.of(context).colorScheme.onSurfaceVariant,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: Theme.of(context).textTheme.bodySmall
+                              ?.copyWith(
+                                color: isActive
+                                    ? Theme.of(context).colorScheme.primary
+                                    : Theme.of(
+                                        context,
+                                      ).colorScheme.onSurfaceVariant,
+                                fontWeight: FontWeight.bold,
+                              ),
                         ),
                 ),
               ),
@@ -237,7 +259,9 @@ class WizardLayout extends StatelessWidget {
                     Text(
                       provider.getStepTitle(step),
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        fontWeight: isActive ? FontWeight.w600 : FontWeight.normal,
+                        fontWeight: isActive
+                            ? FontWeight.w600
+                            : FontWeight.normal,
                         color: isActive
                             ? Theme.of(context).colorScheme.primary
                             : Theme.of(context).colorScheme.onSurface,
@@ -261,7 +285,10 @@ class WizardLayout extends StatelessWidget {
     );
   }
 
-  Widget _buildStepHeader(BuildContext context, HackathonWizardProvider provider) {
+  Widget _buildStepHeader(
+    BuildContext context,
+    HackathonWizardProvider provider,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -311,7 +338,10 @@ class WizardLayout extends StatelessWidget {
     );
   }
 
-  Widget _buildNavigationButtons(BuildContext context, HackathonWizardProvider provider) {
+  Widget _buildNavigationButtons(
+    BuildContext context,
+    HackathonWizardProvider provider,
+  ) {
     return Container(
       padding: ResponsiveUtils.isMobile(context)
           ? const EdgeInsets.all(16)
@@ -346,10 +376,10 @@ class WizardLayout extends StatelessWidget {
               onPressed: provider.isLoading
                   ? null
                   : provider.isLastStep
-                      ? onSubmit
-                      : provider.canProceedToNextStep
-                          ? (onNext ?? provider.nextStep)
-                          : null,
+                  ? onSubmit
+                  : provider.canProceedToNextStep
+                  ? (onNext ?? provider.nextStep)
+                  : null,
               isLoading: provider.isLoading,
               icon: provider.isLastStep ? Icons.check : Icons.arrow_forward,
             ),
@@ -361,13 +391,11 @@ class WizardLayout extends StatelessWidget {
 
   void _showPreview(BuildContext context, HackathonWizardProvider provider) {
     final hackathon = provider.getPreviewData();
-    
+
     showDialog(
       context: context,
       builder: (context) => Dialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         child: Container(
           constraints: const BoxConstraints(maxWidth: 600, maxHeight: 600),
           child: Column(
@@ -414,23 +442,51 @@ class WizardLayout extends StatelessWidget {
                     children: [
                       _buildPreviewSection(context, 'General Information', [
                         _buildPreviewItem(context, 'Name', hackathon.name),
-                        _buildPreviewItem(context, 'Description', hackathon.description),
+                        _buildPreviewItem(
+                          context,
+                          'Description',
+                          hackathon.description,
+                        ),
                         _buildPreviewItem(context, 'Type', hackathon.type),
                         if (hackathon.themeOrFocus?.isNotEmpty == true)
-                          _buildPreviewItem(context, 'Theme/Focus', hackathon.themeOrFocus!),
+                          _buildPreviewItem(
+                            context,
+                            'Theme/Focus',
+                            hackathon.themeOrFocus!,
+                          ),
                       ]),
                       const SizedBox(height: 24),
                       _buildPreviewSection(context, 'Event Details', [
-                        _buildPreviewItem(context, 'Start Date', _formatDateTime(hackathon.startDate)),
-                        _buildPreviewItem(context, 'End Date', _formatDateTime(hackathon.endDate)),
-                        _buildPreviewItem(context, 'Prize Pool', hackathon.prizePoolDetails),
+                        _buildPreviewItem(
+                          context,
+                          'Start Date',
+                          _formatDateTime(hackathon.startDate),
+                        ),
+                        _buildPreviewItem(
+                          context,
+                          'End Date',
+                          _formatDateTime(hackathon.endDate),
+                        ),
+                        _buildPreviewItem(
+                          context,
+                          'Prize Pool',
+                          hackathon.prizePoolDetails,
+                        ),
                       ]),
                       const SizedBox(height: 24),
                       _buildPreviewSection(context, 'Participant Settings', [
                         _buildPreviewItem(context, 'Rules', hackathon.rules),
-                        _buildPreviewItem(context, 'Team Size', '${hackathon.minTeamSize} - ${hackathon.maxTeamSize} members'),
+                        _buildPreviewItem(
+                          context,
+                          'Team Size',
+                          '${hackathon.minTeamSize} - ${hackathon.maxTeamSize} members',
+                        ),
                         if (hackathon.registrationFee != null)
-                          _buildPreviewItem(context, 'Registration Fee', hackathon.formattedRegistrationFee),
+                          _buildPreviewItem(
+                            context,
+                            'Registration Fee',
+                            hackathon.formattedRegistrationFee,
+                          ),
                       ]),
                     ],
                   ),
@@ -443,7 +499,11 @@ class WizardLayout extends StatelessWidget {
     );
   }
 
-  Widget _buildPreviewSection(BuildContext context, String title, List<Widget> children) {
+  Widget _buildPreviewSection(
+    BuildContext context,
+    String title,
+    List<Widget> children,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -474,10 +534,7 @@ class WizardLayout extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 2),
-          Text(
-            value,
-            style: Theme.of(context).textTheme.bodyMedium,
-          ),
+          Text(value, style: Theme.of(context).textTheme.bodyMedium),
         ],
       ),
     );
@@ -491,8 +548,8 @@ class WizardLayout extends StatelessWidget {
     final hour = dateTime.hour == 0
         ? 12
         : dateTime.hour > 12
-            ? dateTime.hour - 12
-            : dateTime.hour;
+        ? dateTime.hour - 12
+        : dateTime.hour;
     final minute = dateTime.minute.toString().padLeft(2, '0');
     final period = dateTime.hour >= 12 ? 'PM' : 'AM';
     return '$hour:$minute $period';

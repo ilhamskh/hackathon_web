@@ -12,7 +12,8 @@ class ModernHackathonWizardPage extends StatefulWidget {
   const ModernHackathonWizardPage({super.key});
 
   @override
-  State<ModernHackathonWizardPage> createState() => _ModernHackathonWizardPageState();
+  State<ModernHackathonWizardPage> createState() =>
+      _ModernHackathonWizardPageState();
 }
 
 class _ModernHackathonWizardPageState extends State<ModernHackathonWizardPage>
@@ -33,16 +34,16 @@ class _ModernHackathonWizardPageState extends State<ModernHackathonWizardPage>
       duration: const Duration(milliseconds: 600),
       vsync: this,
     );
-    
+
     _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(parent: _pageController, curve: Curves.easeInOut),
     );
-    
-    _slideAnimation = Tween<Offset>(
-      begin: const Offset(0, 0.5),
-      end: Offset.zero,
-    ).animate(CurvedAnimation(parent: _pageController, curve: Curves.easeOutCubic));
-    
+
+    _slideAnimation =
+        Tween<Offset>(begin: const Offset(0, 0.5), end: Offset.zero).animate(
+          CurvedAnimation(parent: _pageController, curve: Curves.easeOutCubic),
+        );
+
     _pageController.forward();
   }
 
@@ -96,7 +97,7 @@ class _WizardViewState extends State<_WizardView>
       duration: const Duration(milliseconds: 800),
       vsync: this,
     );
-    
+
     _sidebarController.forward();
     Future.delayed(const Duration(milliseconds: 200), () {
       _contentController.forward();
@@ -119,16 +120,14 @@ class _WizardViewState extends State<_WizardView>
               ? _buildMobileLayout(state)
               : _buildDesktopLayout(state);
         }
-        
+
         return _buildLoadingState();
       },
     );
   }
 
   Widget _buildLoadingState() {
-    return const Center(
-      child: CircularProgressIndicator(),
-    );
+    return const Center(child: CircularProgressIndicator());
   }
 
   Widget _buildMobileLayout(WizardStepChanged state) {
@@ -136,9 +135,7 @@ class _WizardViewState extends State<_WizardView>
       children: [
         _buildMobileHeader(state),
         _buildMobileProgress(state),
-        Expanded(
-          child: _buildStepContent(state),
-        ),
+        Expanded(child: _buildStepContent(state)),
         _buildBottomNavigation(state),
       ],
     );
@@ -148,33 +145,28 @@ class _WizardViewState extends State<_WizardView>
     return Row(
       children: [
         SlideTransition(
-          position: Tween<Offset>(
-            begin: const Offset(-1, 0),
-            end: Offset.zero,
-          ).animate(CurvedAnimation(
-            parent: _sidebarController,
-            curve: Curves.easeOutCubic,
-          )),
-          child: Container(
-            width: 350,
-            child: _buildSidebar(state),
-          ),
+          position: Tween<Offset>(begin: const Offset(-1, 0), end: Offset.zero)
+              .animate(
+                CurvedAnimation(
+                  parent: _sidebarController,
+                  curve: Curves.easeOutCubic,
+                ),
+              ),
+          child: Container(width: 350, child: _buildSidebar(state)),
         ),
         Expanded(
           child: SlideTransition(
-            position: Tween<Offset>(
-              begin: const Offset(1, 0),
-              end: Offset.zero,
-            ).animate(CurvedAnimation(
-              parent: _contentController,
-              curve: Curves.easeOutCubic,
-            )),
+            position: Tween<Offset>(begin: const Offset(1, 0), end: Offset.zero)
+                .animate(
+                  CurvedAnimation(
+                    parent: _contentController,
+                    curve: Curves.easeOutCubic,
+                  ),
+                ),
             child: Column(
               children: [
                 _buildHeader(state),
-                Expanded(
-                  child: _buildStepContent(state),
-                ),
+                Expanded(child: _buildStepContent(state)),
                 _buildBottomNavigation(state),
               ],
             ),
@@ -208,9 +200,7 @@ class _WizardViewState extends State<_WizardView>
           const SizedBox(width: 16),
           Text(
             'Create Hackathon',
-            style: AppTextStyles.h5.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
+            style: AppTextStyles.h5.copyWith(fontWeight: FontWeight.bold),
           ),
         ],
       ),
@@ -245,9 +235,7 @@ class _WizardViewState extends State<_WizardView>
               children: [
                 Text(
                   'Create New Hackathon',
-                  style: AppTextStyles.h4.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: AppTextStyles.h4.copyWith(fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 4),
                 Text(
@@ -365,7 +353,9 @@ class _WizardViewState extends State<_WizardView>
                 LinearProgressIndicator(
                   value: (_getStepNumber(state.currentStep) - 1) / 4,
                   backgroundColor: AppColors.grey200,
-                  valueColor: const AlwaysStoppedAnimation<Color>(AppColors.primary),
+                  valueColor: const AlwaysStoppedAnimation<Color>(
+                    AppColors.primary,
+                  ),
                 ),
               ],
             ),
@@ -377,8 +367,10 @@ class _WizardViewState extends State<_WizardView>
               itemBuilder: (context, index) {
                 final stepInfo = steps[index];
                 final isActive = stepInfo.step == state.currentStep;
-                final isCompleted = _getStepNumber(stepInfo.step) < _getStepNumber(state.currentStep);
-                
+                final isCompleted =
+                    _getStepNumber(stepInfo.step) <
+                    _getStepNumber(state.currentStep);
+
                 return TweenAnimationBuilder<double>(
                   duration: Duration(milliseconds: 200 + (index * 100)),
                   tween: Tween(begin: 0.0, end: 1.0),
@@ -388,7 +380,12 @@ class _WizardViewState extends State<_WizardView>
                       offset: Offset(-50 * (1 - value), 0),
                       child: Opacity(
                         opacity: value,
-                        child: _buildStepItem(stepInfo, isActive, isCompleted, state),
+                        child: _buildStepItem(
+                          stepInfo,
+                          isActive,
+                          isCompleted,
+                          state,
+                        ),
                       ),
                     );
                   },
@@ -401,7 +398,12 @@ class _WizardViewState extends State<_WizardView>
     );
   }
 
-  Widget _buildStepItem(_StepInfo stepInfo, bool isActive, bool isCompleted, WizardStepChanged state) {
+  Widget _buildStepItem(
+    _StepInfo stepInfo,
+    bool isActive,
+    bool isCompleted,
+    WizardStepChanged state,
+  ) {
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
       child: Material(
@@ -432,8 +434,8 @@ class _WizardViewState extends State<_WizardView>
                     color: isCompleted
                         ? AppColors.success
                         : isActive
-                            ? AppColors.primary
-                            : AppColors.grey300,
+                        ? AppColors.primary
+                        : AppColors.grey300,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Icon(
@@ -450,7 +452,9 @@ class _WizardViewState extends State<_WizardView>
                       Text(
                         stepInfo.title,
                         style: AppTextStyles.bodyMedium.copyWith(
-                          fontWeight: isActive ? FontWeight.w600 : FontWeight.w500,
+                          fontWeight: isActive
+                              ? FontWeight.w600
+                              : FontWeight.w500,
                           color: isActive ? AppColors.primary : null,
                         ),
                       ),
@@ -520,7 +524,7 @@ class _WizardViewState extends State<_WizardView>
   Widget _buildBottomNavigation(WizardStepChanged state) {
     final isFirstStep = state.currentStep == WizardStep.generalInformation;
     final isLastStep = state.currentStep == WizardStep.reviewAndSubmit;
-    
+
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
@@ -594,7 +598,9 @@ class _WizardViewState extends State<_WizardView>
         const SizedBox(height: 8),
         Text(
           'Let\'s start with the basic information about your hackathon.',
-          style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textSecondary),
+          style: AppTextStyles.bodyMedium.copyWith(
+            color: AppColors.textSecondary,
+          ),
         ),
         const SizedBox(height: 32),
         AppAnimations.staggeredList(
@@ -631,7 +637,9 @@ class _WizardViewState extends State<_WizardView>
         const SizedBox(height: 8),
         Text(
           'Configure the dates, duration, and logistics of your event.',
-          style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textSecondary),
+          style: AppTextStyles.bodyMedium.copyWith(
+            color: AppColors.textSecondary,
+          ),
         ),
         const SizedBox(height: 32),
         AppAnimations.staggeredList(
@@ -690,7 +698,9 @@ class _WizardViewState extends State<_WizardView>
         const SizedBox(height: 8),
         Text(
           'Configure team sizes, registration fees, and participant requirements.',
-          style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textSecondary),
+          style: AppTextStyles.bodyMedium.copyWith(
+            color: AppColors.textSecondary,
+          ),
         ),
         const SizedBox(height: 32),
         AppAnimations.staggeredList(
@@ -743,7 +753,9 @@ class _WizardViewState extends State<_WizardView>
         const SizedBox(height: 8),
         Text(
           'Set up judging criteria and configure the judging panel.',
-          style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textSecondary),
+          style: AppTextStyles.bodyMedium.copyWith(
+            color: AppColors.textSecondary,
+          ),
         ),
         const SizedBox(height: 32),
         AppAnimations.staggeredList(
@@ -756,7 +768,9 @@ class _WizardViewState extends State<_WizardView>
                   children: [
                     Text(
                       'Judging Criteria',
-                      style: AppTextStyles.h6.copyWith(fontWeight: FontWeight.bold),
+                      style: AppTextStyles.h6.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     const SizedBox(height: 16),
                     const Text('• Innovation and Creativity'),
@@ -794,7 +808,9 @@ class _WizardViewState extends State<_WizardView>
         const SizedBox(height: 8),
         Text(
           'Review all the details before creating your hackathon.',
-          style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textSecondary),
+          style: AppTextStyles.bodyMedium.copyWith(
+            color: AppColors.textSecondary,
+          ),
         ),
         const SizedBox(height: 32),
         AppAnimations.staggeredList(
@@ -834,15 +850,17 @@ class _WizardViewState extends State<_WizardView>
               style: AppTextStyles.h6.copyWith(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 12),
-            ...items.map((item) => Padding(
-              padding: const EdgeInsets.only(bottom: 4),
-              child: Text(
-                item,
-                style: AppTextStyles.bodyMedium.copyWith(
-                  color: AppColors.textSecondary,
+            ...items.map(
+              (item) => Padding(
+                padding: const EdgeInsets.only(bottom: 4),
+                child: Text(
+                  item,
+                  style: AppTextStyles.bodyMedium.copyWith(
+                    color: AppColors.textSecondary,
+                  ),
                 ),
               ),
-            )),
+            ),
           ],
         ),
       ),

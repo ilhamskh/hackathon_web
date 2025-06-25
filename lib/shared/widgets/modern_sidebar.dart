@@ -22,7 +22,7 @@ class ModernSidebar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    
+
     return Container(
       width: isCollapsed ? 80 : 280,
       decoration: BoxDecoration(
@@ -68,25 +68,30 @@ class ModernSidebar extends StatelessWidget {
                     child: Text(
                       'HackAdmin',
                       style: AppTextStyles.sidebarTitle.copyWith(
-                        color: isDark ? AppColors.textDark : AppColors.textPrimary,
+                        color: isDark
+                            ? AppColors.textDark
+                            : AppColors.textPrimary,
                       ),
                     ),
                   ),
                 ],
-                if (onToggleCollapse != null && !ResponsiveUtils.isMobile(context))
+                if (onToggleCollapse != null &&
+                    !ResponsiveUtils.isMobile(context))
                   IconButton(
                     onPressed: onToggleCollapse,
                     icon: Icon(
                       isCollapsed ? Icons.menu_open : Icons.menu,
-                      color: isDark ? AppColors.textDark : AppColors.textPrimary,
+                      color: isDark
+                          ? AppColors.textDark
+                          : AppColors.textPrimary,
                     ),
                   ),
               ],
             ),
           ),
-          
+
           const Divider(height: 1),
-          
+
           // Navigation Items
           Expanded(
             child: ListView.builder(
@@ -94,16 +99,16 @@ class ModernSidebar extends StatelessWidget {
               itemCount: items.length,
               itemBuilder: (context, index) {
                 final item = items[index];
-                
+
                 if (item.isCategory) {
                   return _buildCategoryHeader(context, item);
                 }
-                
+
                 return _buildNavItem(context, item);
               },
             ),
           ),
-          
+
           // Footer
           if (!isCollapsed)
             Container(
@@ -130,13 +135,17 @@ class ModernSidebar extends StatelessWidget {
                             Text(
                               'John Doe',
                               style: AppTextStyles.labelMedium.copyWith(
-                                color: isDark ? AppColors.textDark : AppColors.textPrimary,
+                                color: isDark
+                                    ? AppColors.textDark
+                                    : AppColors.textPrimary,
                               ),
                             ),
                             Text(
                               'Administrator',
                               style: AppTextStyles.caption.copyWith(
-                                color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondary,
+                                color: isDark
+                                    ? AppColors.textSecondaryDark
+                                    : AppColors.textSecondary,
                               ),
                             ),
                           ],
@@ -154,9 +163,9 @@ class ModernSidebar extends StatelessWidget {
 
   Widget _buildCategoryHeader(BuildContext context, SidebarItem item) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    
+
     if (isCollapsed) return const SizedBox.shrink();
-    
+
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 24, 20, 8),
       child: Text(
@@ -171,7 +180,7 @@ class ModernSidebar extends StatelessWidget {
   Widget _buildNavItem(BuildContext context, SidebarItem item) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final isSelected = selectedRoute == item.route;
-    
+
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
       child: Material(
@@ -185,7 +194,9 @@ class ModernSidebar extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             decoration: BoxDecoration(
               color: isSelected
-                  ? (isDark ? AppColors.sidebarItemActiveDark : AppColors.sidebarItemActive)
+                  ? (isDark
+                        ? AppColors.sidebarItemActiveDark
+                        : AppColors.sidebarItemActive)
                   : null,
               borderRadius: BorderRadius.circular(12),
             ),
@@ -196,7 +207,9 @@ class ModernSidebar extends StatelessWidget {
                   size: 24,
                   color: isSelected
                       ? AppColors.primary
-                      : (isDark ? AppColors.textSecondaryDark : AppColors.textSecondary),
+                      : (isDark
+                            ? AppColors.textSecondaryDark
+                            : AppColors.textSecondary),
                 ),
                 if (!isCollapsed) ...[
                   const SizedBox(width: 16),
@@ -206,8 +219,12 @@ class ModernSidebar extends StatelessWidget {
                       style: AppTextStyles.sidebarItem.copyWith(
                         color: isSelected
                             ? AppColors.primary
-                            : (isDark ? AppColors.textDark : AppColors.textPrimary),
-                        fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+                            : (isDark
+                                  ? AppColors.textDark
+                                  : AppColors.textPrimary),
+                        fontWeight: isSelected
+                            ? FontWeight.w600
+                            : FontWeight.w500,
                       ),
                     ),
                   ),
@@ -215,7 +232,10 @@ class ModernSidebar extends StatelessWidget {
                 if (item.badge != null && !isCollapsed) ...[
                   const SizedBox(width: 8),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
+                    ),
                     decoration: BoxDecoration(
                       color: AppColors.error,
                       borderRadius: BorderRadius.circular(12),
@@ -254,11 +274,7 @@ class SidebarItem {
   });
 
   static SidebarItem category(String title) {
-    return SidebarItem(
-      title: title,
-      icon: Icons.category,
-      isCategory: true,
-    );
+    return SidebarItem(title: title, icon: Icons.category, isCategory: true);
   }
 }
 
@@ -287,7 +303,7 @@ class _ResponsiveLayoutState extends State<ResponsiveLayout> {
   Widget build(BuildContext context) {
     final isMobile = ResponsiveUtils.isMobile(context);
     final isTablet = ResponsiveUtils.isTablet(context);
-    
+
     if (isMobile) {
       return _buildMobileLayout();
     } else if (isTablet) {

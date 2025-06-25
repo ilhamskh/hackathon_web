@@ -88,7 +88,9 @@ class HackathonCubit extends Cubit<HackathonState> {
 
       if (response.isSuccess) {
         final hackathons = response.data!
-            .map((json) => HackathonModel.fromJson(json as Map<String, dynamic>))
+            .map(
+              (json) => HackathonModel.fromJson(json as Map<String, dynamic>),
+            )
             .toList();
         emit(HackathonListLoaded(hackathons));
       } else {
@@ -165,9 +167,7 @@ class HackathonCubit extends Cubit<HackathonState> {
     emit(HackathonLoading());
 
     try {
-      final response = await _httpService.delete(
-        '/hackathons/$id',
-      );
+      final response = await _httpService.delete('/hackathons/$id');
 
       if (response.isSuccess) {
         emit(HackathonDeleted(id));
@@ -192,7 +192,9 @@ class HackathonCubit extends Cubit<HackathonState> {
         // Reload the hackathon to get updated landing page URL
         await loadHackathon(hackathonId);
       } else {
-        emit(HackathonError(response.message ?? 'Failed to generate landing page'));
+        emit(
+          HackathonError(response.message ?? 'Failed to generate landing page'),
+        );
       }
     } catch (e) {
       emit(HackathonError('Failed to generate landing page: ${e.toString()}'));

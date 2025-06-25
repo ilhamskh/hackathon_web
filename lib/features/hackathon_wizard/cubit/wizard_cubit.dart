@@ -27,10 +27,7 @@ class WizardStepChanged extends WizardState {
   final WizardStep currentStep;
   final HackathonModel hackathon;
 
-  const WizardStepChanged({
-    required this.currentStep,
-    required this.hackathon,
-  });
+  const WizardStepChanged({required this.currentStep, required this.hackathon});
 
   @override
   List<Object> get props => [currentStep, hackathon];
@@ -62,7 +59,7 @@ class WizardError extends WizardState {
 @injectable
 class WizardCubit extends Cubit<WizardState> {
   final HttpService _httpService;
-  
+
   WizardStep _currentStep = WizardStep.generalInformation;
   HackathonModel _hackathon = HackathonModel(
     name: '',
@@ -87,10 +84,7 @@ class WizardCubit extends Cubit<WizardState> {
   bool get canGoPrevious => _currentStep != WizardStep.generalInformation;
 
   void _emitCurrentState() {
-    emit(WizardStepChanged(
-      currentStep: _currentStep,
-      hackathon: _hackathon,
-    ));
+    emit(WizardStepChanged(currentStep: _currentStep, hackathon: _hackathon));
   }
 
   // Navigation methods
@@ -191,7 +185,9 @@ class WizardCubit extends Cubit<WizardState> {
       minTeamSize: minTeamSize ?? _hackathon.minTeamSize,
       maxTeamSize: maxTeamSize ?? _hackathon.maxTeamSize,
       registrationFee: registrationFee ?? _hackathon.registrationFee,
-      registrationFeeJustification: registrationFeeJustification ?? _hackathon.registrationFeeJustification,
+      registrationFeeJustification:
+          registrationFeeJustification ??
+          _hackathon.registrationFeeJustification,
       createdAt: _hackathon.createdAt,
       updatedAt: _hackathon.updatedAt,
       status: _hackathon.status,
@@ -201,26 +197,26 @@ class WizardCubit extends Cubit<WizardState> {
 
   // Validation methods
   bool validateGeneralInformation() {
-    return _hackathon.name.isNotEmpty && 
-           _hackathon.description.isNotEmpty &&
-           _hackathon.type.isNotEmpty;
+    return _hackathon.name.isNotEmpty &&
+        _hackathon.description.isNotEmpty &&
+        _hackathon.type.isNotEmpty;
   }
 
   bool validateEventDetails() {
     return _hackathon.startDate.isBefore(_hackathon.endDate) &&
-           _hackathon.prizePoolDetails.isNotEmpty;
+        _hackathon.prizePoolDetails.isNotEmpty;
   }
 
   bool validateParticipantSettings() {
     return _hackathon.rules.isNotEmpty &&
-           _hackathon.minTeamSize <= _hackathon.maxTeamSize &&
-           _hackathon.minTeamSize > 0;
+        _hackathon.minTeamSize <= _hackathon.maxTeamSize &&
+        _hackathon.minTeamSize > 0;
   }
 
   bool validateAll() {
     return validateGeneralInformation() &&
-           validateEventDetails() &&
-           validateParticipantSettings();
+        validateEventDetails() &&
+        validateParticipantSettings();
   }
 
   // Submit hackathon

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
-import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart' as picker;
+import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart'
+    as picker;
 import 'package:hackathon_web/core/design/app_spacing.dart';
 import 'package:hackathon_web/core/design/app_typography.dart';
 import 'package:intl/intl.dart';
@@ -17,7 +18,7 @@ class GlassContainer extends StatelessWidget {
   final double opacity;
   final Color? color;
   final bool showBorder;
-  
+
   const GlassContainer({
     super.key,
     required this.child,
@@ -35,9 +36,9 @@ class GlassContainer extends StatelessWidget {
       margin: margin,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(borderRadius),
-        border: showBorder 
-          ? Border.all(color: AppColors.white.withOpacity(0.2), width: 1)
-          : null,
+        border: showBorder
+            ? Border.all(color: AppColors.white.withOpacity(0.2), width: 1)
+            : null,
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(borderRadius),
@@ -69,7 +70,7 @@ class ModernButton extends StatefulWidget {
   final double? width;
   final double? height;
   final EdgeInsetsGeometry? padding;
-  
+
   const ModernButton({
     super.key,
     required this.text,
@@ -88,7 +89,7 @@ class ModernButton extends StatefulWidget {
   State<ModernButton> createState() => _ModernButtonState();
 }
 
-class _ModernButtonState extends State<ModernButton> 
+class _ModernButtonState extends State<ModernButton>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _scaleAnimation;
@@ -101,12 +102,14 @@ class _ModernButtonState extends State<ModernButton>
       duration: const Duration(milliseconds: 150),
       vsync: this,
     );
-    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.95).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-    );
-    _opacityAnimation = Tween<double>(begin: 1.0, end: 0.8).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-    );
+    _scaleAnimation = Tween<double>(
+      begin: 1.0,
+      end: 0.95,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
+    _opacityAnimation = Tween<double>(
+      begin: 1.0,
+      end: 0.8,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
   }
 
   @override
@@ -119,7 +122,7 @@ class _ModernButtonState extends State<ModernButton>
   Widget build(BuildContext context) {
     final buttonColor = widget.color ?? AppColors.primary;
     final textColor = widget.textColor ?? AppColors.white;
-    
+
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, child) {
@@ -137,22 +140,26 @@ class _ModernButtonState extends State<ModernButton>
                 height: widget.height ?? 48,
                 padding: widget.padding ?? AppSpacing.paddingMD,
                 decoration: BoxDecoration(
-                  gradient: widget.isOutlined ? null : LinearGradient(
-                    colors: [buttonColor, buttonColor.withOpacity(0.8)],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                  border: widget.isOutlined 
-                    ? Border.all(color: buttonColor, width: 2)
-                    : null,
+                  gradient: widget.isOutlined
+                      ? null
+                      : LinearGradient(
+                          colors: [buttonColor, buttonColor.withOpacity(0.8)],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                  border: widget.isOutlined
+                      ? Border.all(color: buttonColor, width: 2)
+                      : null,
                   borderRadius: AppBorderRadius.radiusLG,
-                  boxShadow: widget.isOutlined ? null : [
-                    BoxShadow(
-                      color: buttonColor.withOpacity(0.3),
-                      blurRadius: 8,
-                      offset: const Offset(0, 4),
-                    ),
-                  ],
+                  boxShadow: widget.isOutlined
+                      ? null
+                      : [
+                          BoxShadow(
+                            color: buttonColor.withOpacity(0.3),
+                            blurRadius: 8,
+                            offset: const Offset(0, 4),
+                          ),
+                        ],
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
@@ -199,7 +206,7 @@ class ModernCard extends StatefulWidget {
   final double? elevation;
   final Color? color;
   final bool showHoverEffect;
-  
+
   const ModernCard({
     super.key,
     required this.child,
@@ -215,12 +222,12 @@ class ModernCard extends StatefulWidget {
   State<ModernCard> createState() => _ModernCardState();
 }
 
-class _ModernCardState extends State<ModernCard> 
+class _ModernCardState extends State<ModernCard>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _elevationAnimation;
   late Animation<double> _scaleAnimation;
-  
+
   bool _isHovered = false;
 
   @override
@@ -234,9 +241,10 @@ class _ModernCardState extends State<ModernCard>
       begin: widget.elevation ?? AppElevation.sm,
       end: (widget.elevation ?? AppElevation.sm) + 4,
     ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
-    _scaleAnimation = Tween<double>(begin: 1.0, end: 1.02).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeOut),
-    );
+    _scaleAnimation = Tween<double>(
+      begin: 1.0,
+      end: 1.02,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
   }
 
   @override
@@ -279,9 +287,9 @@ class _ModernCardState extends State<ModernCard>
                   decoration: BoxDecoration(
                     borderRadius: AppBorderRadius.radiusLG,
                     border: Border.all(
-                      color: _isHovered 
-                        ? AppColors.primary.withOpacity(0.2)
-                        : AppColors.grey200,
+                      color: _isHovered
+                          ? AppColors.primary.withOpacity(0.2)
+                          : AppColors.grey200,
                       width: 1,
                     ),
                   ),
@@ -310,7 +318,7 @@ class ModernTextField extends StatefulWidget {
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final bool obscureText;
-  
+
   const ModernTextField({
     super.key,
     required this.label,
@@ -331,13 +339,13 @@ class ModernTextField extends StatefulWidget {
   State<ModernTextField> createState() => _ModernTextFieldState();
 }
 
-class _ModernTextFieldState extends State<ModernTextField> 
+class _ModernTextFieldState extends State<ModernTextField>
     with SingleTickerProviderStateMixin {
   late TextEditingController _controller;
   late FocusNode _focusNode;
   late AnimationController _animationController;
   late Animation<Color?> _borderColorAnimation;
-  
+
   bool _isFocused = false;
 
   @override
@@ -353,7 +361,7 @@ class _ModernTextFieldState extends State<ModernTextField>
       begin: AppColors.grey300,
       end: AppColors.primary,
     ).animate(_animationController);
-    
+
     _focusNode.addListener(() {
       setState(() => _isFocused = _focusNode.hasFocus);
       if (_focusNode.hasFocus) {
@@ -387,27 +395,31 @@ class _ModernTextFieldState extends State<ModernTextField>
                   color: _isFocused ? AppColors.primary : AppColors.grey600,
                   fontWeight: FontWeight.w600,
                 ),
-                children: widget.required ? [
-                  TextSpan(
-                    text: ' *',
-                    style: AppTypography.labelMedium.copyWith(
-                      color: AppColors.error,
-                    ),
-                  ),
-                ] : null,
+                children: widget.required
+                    ? [
+                        TextSpan(
+                          text: ' *',
+                          style: AppTypography.labelMedium.copyWith(
+                            color: AppColors.error,
+                          ),
+                        ),
+                      ]
+                    : null,
               ),
             ),
             AppSpacing.verticalGapSM,
             Container(
               decoration: BoxDecoration(
                 borderRadius: AppBorderRadius.radiusLG,
-                boxShadow: _isFocused ? [
-                  BoxShadow(
-                    color: AppColors.primary.withOpacity(0.1),
-                    blurRadius: 8,
-                    offset: const Offset(0, 2),
-                  ),
-                ] : null,
+                boxShadow: _isFocused
+                    ? [
+                        BoxShadow(
+                          color: AppColors.primary.withOpacity(0.1),
+                          blurRadius: 8,
+                          offset: const Offset(0, 2),
+                        ),
+                      ]
+                    : null,
               ),
               child: TextFormField(
                 controller: _controller,
@@ -433,16 +445,17 @@ class _ModernTextFieldState extends State<ModernTextField>
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: AppBorderRadius.radiusLG,
-                    borderSide: const BorderSide(color: AppColors.primary, width: 2),
+                    borderSide: const BorderSide(
+                      color: AppColors.primary,
+                      width: 2,
+                    ),
                   ),
                   errorBorder: OutlineInputBorder(
                     borderRadius: AppBorderRadius.radiusLG,
                     borderSide: const BorderSide(color: AppColors.error),
                   ),
                   filled: true,
-                  fillColor: _isFocused 
-                    ? AppColors.white 
-                    : AppColors.grey50,
+                  fillColor: _isFocused ? AppColors.white : AppColors.grey50,
                 ),
               ),
             ),
@@ -463,7 +476,7 @@ class ModernDropdown extends StatefulWidget {
   final bool required;
   final String? hint;
   final bool searchable;
-  
+
   const ModernDropdown({
     super.key,
     required this.label,
@@ -493,14 +506,16 @@ class _ModernDropdownState extends State<ModernDropdown> {
               color: AppColors.grey600,
               fontWeight: FontWeight.w600,
             ),
-            children: widget.required ? [
-              TextSpan(
-                text: ' *',
-                style: AppTypography.labelMedium.copyWith(
-                  color: AppColors.error,
-                ),
-              ),
-            ] : null,
+            children: widget.required
+                ? [
+                    TextSpan(
+                      text: ' *',
+                      style: AppTypography.labelMedium.copyWith(
+                        color: AppColors.error,
+                      ),
+                    ),
+                  ]
+                : null,
           ),
         ),
         AppSpacing.verticalGapSM,
@@ -520,10 +535,7 @@ class _ModernDropdownState extends State<ModernDropdown> {
             items: widget.items.map((item) {
               return DropdownMenuItem<String>(
                 value: item,
-                child: Text(
-                  item,
-                  style: AppTypography.bodyMedium,
-                ),
+                child: Text(item, style: AppTypography.bodyMedium),
               );
             }).toList(),
             onChanged: widget.onChanged,
@@ -551,7 +563,7 @@ class StatusBadge extends StatelessWidget {
   final String text;
   final String status;
   final bool showDot;
-  
+
   const StatusBadge({
     super.key,
     required this.text,
@@ -563,7 +575,7 @@ class StatusBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     Color backgroundColor;
     Color textColor;
-    
+
     switch (status.toLowerCase()) {
       case 'active':
       case 'published':
@@ -589,7 +601,7 @@ class StatusBadge extends StatelessWidget {
         backgroundColor = AppColors.info.withOpacity(0.1);
         textColor = AppColors.info;
     }
-    
+
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: AppSpacing.sm,
@@ -635,7 +647,7 @@ class MetricCard extends StatefulWidget {
   final Color? color;
   final String? trend;
   final bool showTrend;
-  
+
   const MetricCard({
     super.key,
     required this.title,
@@ -651,7 +663,7 @@ class MetricCard extends StatefulWidget {
   State<MetricCard> createState() => _MetricCardState();
 }
 
-class _MetricCardState extends State<MetricCard> 
+class _MetricCardState extends State<MetricCard>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _valueAnimation;
@@ -663,9 +675,10 @@ class _MetricCardState extends State<MetricCard>
       duration: const Duration(milliseconds: 1000),
       vsync: this,
     );
-    _valueAnimation = Tween<double>(begin: 0, end: 1).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeOut),
-    );
+    _valueAnimation = Tween<double>(
+      begin: 0,
+      end: 1,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
     _controller.forward();
   }
 
@@ -678,7 +691,7 @@ class _MetricCardState extends State<MetricCard>
   @override
   Widget build(BuildContext context) {
     final cardColor = widget.color ?? AppColors.primary;
-    
+
     return ModernCard(
       padding: AppSpacing.paddingLG,
       child: Column(
@@ -692,11 +705,7 @@ class _MetricCardState extends State<MetricCard>
                   color: cardColor.withOpacity(0.1),
                   borderRadius: AppBorderRadius.radiusMD,
                 ),
-                child: Icon(
-                  widget.icon,
-                  color: cardColor,
-                  size: 24,
-                ),
+                child: Icon(widget.icon, color: cardColor, size: 24),
               ),
               const Spacer(),
               if (widget.showTrend && widget.trend != null)
@@ -723,9 +732,7 @@ class _MetricCardState extends State<MetricCard>
           AppSpacing.verticalGapXS,
           Text(
             widget.title,
-            style: AppTypography.bodyMedium.copyWith(
-              color: AppColors.grey600,
-            ),
+            style: AppTypography.bodyMedium.copyWith(color: AppColors.grey600),
           ),
           if (widget.subtitle != null) ...[
             AppSpacing.verticalGapXS,
@@ -778,7 +785,7 @@ class _ModernDateTimePickerState extends State<ModernDateTimePicker>
   late AnimationController _animationController;
   late Animation<Color?> _borderColorAnimation;
   late Animation<double> _scaleAnimation;
-  
+
   bool _isFocused = false;
   String? _errorText;
 
@@ -789,22 +796,18 @@ class _ModernDateTimePickerState extends State<ModernDateTimePicker>
       duration: const Duration(milliseconds: 200),
       vsync: this,
     );
-    
-    _borderColorAnimation = ColorTween(
-      begin: AppColors.grey300,
-      end: AppColors.primary,
-    ).animate(CurvedAnimation(
-      parent: _animationController,
-      curve: Curves.easeInOut,
-    ));
-    
-    _scaleAnimation = Tween<double>(
-      begin: 1.0,
-      end: 1.02,
-    ).animate(CurvedAnimation(
-      parent: _animationController,
-      curve: Curves.easeInOut,
-    ));
+
+    _borderColorAnimation =
+        ColorTween(begin: AppColors.grey300, end: AppColors.primary).animate(
+          CurvedAnimation(
+            parent: _animationController,
+            curve: Curves.easeInOut,
+          ),
+        );
+
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 1.02).animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
+    );
   }
 
   @override
@@ -981,7 +984,7 @@ class _ModernDateTimePickerState extends State<ModernDateTimePicker>
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -991,7 +994,9 @@ class _ModernDateTimePickerState extends State<ModernDateTimePicker>
             text: TextSpan(
               text: widget.label,
               style: AppTextStyles.labelMedium.copyWith(
-                color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondary,
+                color: isDark
+                    ? AppColors.textSecondaryDark
+                    : AppColors.textSecondary,
                 fontWeight: FontWeight.w500,
               ),
               children: [
@@ -1015,15 +1020,19 @@ class _ModernDateTimePickerState extends State<ModernDateTimePicker>
             return Transform.scale(
               scale: _scaleAnimation.value,
               child: GestureDetector(
-                onTap: widget.enabled ? () => _showDateTimePicker(context) : null,
+                onTap: widget.enabled
+                    ? () => _showDateTimePicker(context)
+                    : null,
                 child: Container(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 16,
                     vertical: 16,
                   ),
                   decoration: BoxDecoration(
-                    color: widget.enabled 
-                        ? (isDark ? AppColors.surfaceDark : AppColors.surfaceLight)
+                    color: widget.enabled
+                        ? (isDark
+                              ? AppColors.surfaceDark
+                              : AppColors.surfaceLight)
                         : AppColors.grey100,
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
@@ -1035,10 +1044,11 @@ class _ModernDateTimePickerState extends State<ModernDateTimePicker>
                     boxShadow: _isFocused
                         ? [
                             BoxShadow(
-                              color: (widget.value != null
-                                      ? AppColors.primary
-                                      : AppColors.grey400)
-                                  .withOpacity(0.1),
+                              color:
+                                  (widget.value != null
+                                          ? AppColors.primary
+                                          : AppColors.grey400)
+                                      .withOpacity(0.1),
                               blurRadius: 8,
                               offset: const Offset(0, 2),
                             ),
@@ -1052,10 +1062,11 @@ class _ModernDateTimePickerState extends State<ModernDateTimePicker>
                         duration: const Duration(milliseconds: 200),
                         padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
-                          color: (widget.value != null
-                                  ? AppColors.primary
-                                  : AppColors.grey400)
-                              .withOpacity(0.1),
+                          color:
+                              (widget.value != null
+                                      ? AppColors.primary
+                                      : AppColors.grey400)
+                                  .withOpacity(0.1),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Icon(
@@ -1069,18 +1080,22 @@ class _ModernDateTimePickerState extends State<ModernDateTimePicker>
                         ),
                       ),
                       const SizedBox(width: 12),
-                      
+
                       // Value or Hint Text
                       Expanded(
                         child: AnimatedDefaultTextStyle(
                           duration: const Duration(milliseconds: 200),
                           style: widget.value != null
                               ? AppTextStyles.bodyMedium.copyWith(
-                                  color: isDark ? AppColors.textDark : AppColors.textPrimary,
+                                  color: isDark
+                                      ? AppColors.textDark
+                                      : AppColors.textPrimary,
                                   fontWeight: FontWeight.w500,
                                 )
                               : AppTextStyles.bodyMedium.copyWith(
-                                  color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondary,
+                                  color: isDark
+                                      ? AppColors.textSecondaryDark
+                                      : AppColors.textSecondary,
                                 ),
                           child: Text(
                             widget.value != null
@@ -1089,14 +1104,16 @@ class _ModernDateTimePickerState extends State<ModernDateTimePicker>
                           ),
                         ),
                       ),
-                      
+
                       // Arrow Icon
                       AnimatedRotation(
                         duration: const Duration(milliseconds: 200),
                         turns: _isFocused ? 0.5 : 0,
                         child: Icon(
                           Icons.keyboard_arrow_down_rounded,
-                          color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondary,
+                          color: isDark
+                              ? AppColors.textSecondaryDark
+                              : AppColors.textSecondary,
                           size: 24,
                         ),
                       ),
@@ -1113,11 +1130,7 @@ class _ModernDateTimePickerState extends State<ModernDateTimePicker>
           const SizedBox(height: 8),
           Row(
             children: [
-              Icon(
-                Icons.error_outline,
-                color: AppColors.error,
-                size: 16,
-              ),
+              Icon(Icons.error_outline, color: AppColors.error, size: 16),
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
@@ -1136,8 +1149,4 @@ class _ModernDateTimePickerState extends State<ModernDateTimePicker>
 }
 
 // Enum for DateTimePicker modes
-enum DateTimePickerMode {
-  date,
-  time,
-  dateTime,
-}
+enum DateTimePickerMode { date, time, dateTime }

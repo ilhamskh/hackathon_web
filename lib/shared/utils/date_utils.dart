@@ -102,12 +102,18 @@ class DateUtils {
   }
 
   // Get difference in hours
-  static int getDifferenceInHours(DateTime startDateTime, DateTime endDateTime) {
+  static int getDifferenceInHours(
+    DateTime startDateTime,
+    DateTime endDateTime,
+  ) {
     return endDateTime.difference(startDateTime).inHours;
   }
 
   // Get difference in minutes
-  static int getDifferenceInMinutes(DateTime startDateTime, DateTime endDateTime) {
+  static int getDifferenceInMinutes(
+    DateTime startDateTime,
+    DateTime endDateTime,
+  ) {
     return endDateTime.difference(startDateTime).inMinutes;
   }
 
@@ -171,7 +177,7 @@ class DateUtils {
   // Get duration between dates in human readable format
   static String getDurationString(DateTime startDate, DateTime endDate) {
     final difference = endDate.difference(startDate);
-    
+
     if (difference.inDays > 0) {
       return '${difference.inDays} day${difference.inDays == 1 ? '' : 's'}';
     } else if (difference.inHours > 0) {

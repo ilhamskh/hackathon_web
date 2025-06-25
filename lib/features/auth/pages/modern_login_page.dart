@@ -19,7 +19,7 @@ class _ModernLoginPageState extends State<ModernLoginPage>
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  
+
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _slideAnimation;
@@ -34,15 +34,13 @@ class _ModernLoginPageState extends State<ModernLoginPage>
     _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(parent: _animationController, curve: Curves.easeOut),
     );
-    _slideAnimation = Tween<Offset>(
-      begin: const Offset(0, 0.3),
-      end: Offset.zero,
-    ).animate(
-      CurvedAnimation(parent: _animationController, curve: Curves.easeOut),
-    );
-    
+    _slideAnimation =
+        Tween<Offset>(begin: const Offset(0, 0.3), end: Offset.zero).animate(
+          CurvedAnimation(parent: _animationController, curve: Curves.easeOut),
+        );
+
     _animationController.forward();
-    
+
     // Set demo credentials
     _emailController.text = 'admin@hackathon.com';
     _passwordController.text = 'admin123';
@@ -69,7 +67,7 @@ class _ModernLoginPageState extends State<ModernLoginPage>
   @override
   Widget build(BuildContext context) {
     final isMobile = ResponsiveUtils.isMobile(context);
-    
+
     return Scaffold(
       backgroundColor: AppColors.gray50,
       body: Container(
@@ -106,19 +104,19 @@ class _ModernLoginPageState extends State<ModernLoginPage>
                           _buildHeader(),
                           AppSpacing.verticalGapXL,
                           AppSpacing.verticalGapXL,
-                          
+
                           // Demo Credentials Info
                           _buildDemoInfo(),
                           AppSpacing.verticalGapXL,
-                          
+
                           // Login Form
                           _buildLoginForm(),
                           AppSpacing.verticalGapXL,
-                          
+
                           // Login Button
                           _buildLoginButton(),
                           AppSpacing.verticalGapLG,
-                          
+
                           // Additional Links
                           _buildAdditionalLinks(),
                         ],
@@ -161,9 +159,7 @@ class _ModernLoginPageState extends State<ModernLoginPage>
         AppSpacing.verticalGapSM,
         Text(
           'Welcome back! Please sign in to your account.',
-          style: AppTypography.bodyLarge.copyWith(
-            color: AppColors.gray600,
-          ),
+          style: AppTypography.bodyLarge.copyWith(color: AppColors.gray600),
           textAlign: TextAlign.center,
         ),
       ],
@@ -176,19 +172,13 @@ class _ModernLoginPageState extends State<ModernLoginPage>
       decoration: BoxDecoration(
         color: AppColors.info.withOpacity(0.1),
         borderRadius: AppBorderRadius.radiusLG,
-        border: Border.all(
-          color: AppColors.info.withOpacity(0.2),
-        ),
+        border: Border.all(color: AppColors.info.withOpacity(0.2)),
       ),
       child: Column(
         children: [
           Row(
             children: [
-              Icon(
-                Icons.info_outline_rounded,
-                color: AppColors.info,
-                size: 20,
-              ),
+              Icon(Icons.info_outline_rounded, color: AppColors.info, size: 20),
               AppSpacing.horizontalGapSM,
               Text(
                 'Demo Credentials',
@@ -375,9 +365,7 @@ class _ModernLoginPageState extends State<ModernLoginPage>
         RichText(
           text: TextSpan(
             text: "Don't have an account? ",
-            style: AppTypography.bodyMedium.copyWith(
-              color: AppColors.gray600,
-            ),
+            style: AppTypography.bodyMedium.copyWith(color: AppColors.gray600),
             children: [
               WidgetSpan(
                 child: GestureDetector(

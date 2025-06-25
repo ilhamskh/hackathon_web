@@ -73,11 +73,11 @@ class HackathonModel {
       maxTeamSize: json['max_team_size'] ?? 6,
       registrationFee: json['registration_fee']?.toDouble(),
       registrationFeeJustification: json['registration_fee_justification'],
-      createdAt: json['created_at'] != null 
-          ? DateTime.parse(json['created_at']) 
+      createdAt: json['created_at'] != null
+          ? DateTime.parse(json['created_at'])
           : null,
-      updatedAt: json['updated_at'] != null 
-          ? DateTime.parse(json['updated_at']) 
+      updatedAt: json['updated_at'] != null
+          ? DateTime.parse(json['updated_at'])
           : null,
       status: json['status'],
     );
@@ -115,7 +115,8 @@ class HackathonModel {
       minTeamSize: minTeamSize ?? this.minTeamSize,
       maxTeamSize: maxTeamSize ?? this.maxTeamSize,
       registrationFee: registrationFee ?? this.registrationFee,
-      registrationFeeJustification: registrationFeeJustification ?? this.registrationFeeJustification,
+      registrationFeeJustification:
+          registrationFeeJustification ?? this.registrationFeeJustification,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
       status: status ?? this.status,
@@ -125,14 +126,14 @@ class HackathonModel {
   // Check if hackathon is valid
   bool get isValid {
     return name.isNotEmpty &&
-           description.isNotEmpty &&
-           type.isNotEmpty &&
-           prizePoolDetails.isNotEmpty &&
-           rules.isNotEmpty &&
-           minTeamSize > 0 &&
-           maxTeamSize > 0 &&
-           minTeamSize <= maxTeamSize &&
-           startDate.isBefore(endDate);
+        description.isNotEmpty &&
+        type.isNotEmpty &&
+        prizePoolDetails.isNotEmpty &&
+        rules.isNotEmpty &&
+        minTeamSize > 0 &&
+        maxTeamSize > 0 &&
+        minTeamSize <= maxTeamSize &&
+        startDate.isBefore(endDate);
   }
 
   // Get duration in days
@@ -174,7 +175,7 @@ class HackathonModel {
     if (status != null) {
       return status!;
     }
-    
+
     if (isPast) {
       return 'Completed';
     } else if (isRunning) {
@@ -194,20 +195,20 @@ class HackathonModel {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    
+
     return other is HackathonModel &&
-           other.id == id &&
-           other.name == name &&
-           other.description == description &&
-           other.type == type &&
-           other.themeOrFocus == themeOrFocus &&
-           other.startDate == startDate &&
-           other.endDate == endDate &&
-           other.prizePoolDetails == prizePoolDetails &&
-           other.rules == rules &&
-           other.minTeamSize == minTeamSize &&
-           other.maxTeamSize == maxTeamSize &&
-           other.registrationFee == registrationFee;
+        other.id == id &&
+        other.name == name &&
+        other.description == description &&
+        other.type == type &&
+        other.themeOrFocus == themeOrFocus &&
+        other.startDate == startDate &&
+        other.endDate == endDate &&
+        other.prizePoolDetails == prizePoolDetails &&
+        other.rules == rules &&
+        other.minTeamSize == minTeamSize &&
+        other.maxTeamSize == maxTeamSize &&
+        other.registrationFee == registrationFee;
   }
 
   @override

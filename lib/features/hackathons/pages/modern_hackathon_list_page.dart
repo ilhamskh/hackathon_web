@@ -14,7 +14,8 @@ class ModernHackathonListPage extends StatefulWidget {
   const ModernHackathonListPage({super.key});
 
   @override
-  State<ModernHackathonListPage> createState() => _ModernHackathonListPageState();
+  State<ModernHackathonListPage> createState() =>
+      _ModernHackathonListPageState();
 }
 
 class _ModernHackathonListPageState extends State<ModernHackathonListPage>
@@ -30,9 +31,10 @@ class _ModernHackathonListPageState extends State<ModernHackathonListPage>
       duration: const Duration(milliseconds: 1000),
       vsync: this,
     );
-    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-    );
+    _fadeAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
     _controller.forward();
   }
 
@@ -45,7 +47,8 @@ class _ModernHackathonListPageState extends State<ModernHackathonListPage>
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => HackathonCubit(context.read<HttpService>())..loadHackathons(),
+      create: (context) =>
+          HackathonCubit(context.read<HttpService>())..loadHackathons(),
       child: AnimatedBuilder(
         animation: _fadeAnimation,
         builder: (context, child) {
@@ -89,7 +92,7 @@ class _HackathonListView extends StatelessWidget {
         icon: Icons.analytics_rounded,
         route: '/analytics',
       ),
-      
+
       SidebarItem.category('Management'),
       const SidebarItem(
         title: 'Hackathons',
@@ -112,7 +115,7 @@ class _HackathonListView extends StatelessWidget {
         icon: Icons.assignment_rounded,
         route: '/submissions',
       ),
-      
+
       SidebarItem.category('Settings'),
       const SidebarItem(
         title: 'Configuration',
@@ -157,7 +160,7 @@ class _HackathonContentState extends State<_HackathonContent>
       duration: const Duration(milliseconds: 800),
       vsync: this,
     );
-    
+
     _headerController.forward();
     Future.delayed(const Duration(milliseconds: 200), () {
       _listController.forward();
@@ -182,9 +185,7 @@ class _HackathonContentState extends State<_HackathonContent>
           body: Column(
             children: [
               _buildAnimatedHeader(context),
-              Expanded(
-                child: _buildAnimatedContent(context, state),
-              ),
+              Expanded(child: _buildAnimatedContent(context, state)),
             ],
           ),
           floatingActionButton: AppAnimations.floatingAction(
@@ -196,7 +197,10 @@ class _HackathonContentState extends State<_HackathonContent>
               icon: const Icon(Icons.add, color: AppColors.white),
               label: const Text(
                 'New Hackathon',
-                style: TextStyle(color: AppColors.white, fontWeight: FontWeight.w600),
+                style: TextStyle(
+                  color: AppColors.white,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
           ),
@@ -207,13 +211,13 @@ class _HackathonContentState extends State<_HackathonContent>
 
   Widget _buildAnimatedHeader(BuildContext context) {
     return SlideTransition(
-      position: Tween<Offset>(
-        begin: const Offset(0, -1),
-        end: Offset.zero,
-      ).animate(CurvedAnimation(
-        parent: _headerController,
-        curve: Curves.easeOutCubic,
-      )),
+      position: Tween<Offset>(begin: const Offset(0, -1), end: Offset.zero)
+          .animate(
+            CurvedAnimation(
+              parent: _headerController,
+              curve: Curves.easeOutCubic,
+            ),
+          ),
       child: Container(
         padding: const EdgeInsets.all(24),
         decoration: BoxDecoration(
@@ -282,9 +286,7 @@ class _HackathonContentState extends State<_HackathonContent>
                   ),
                 ),
                 const SizedBox(width: 16),
-                Expanded(
-                  child: _buildStatusFilter(),
-                ),
+                Expanded(child: _buildStatusFilter()),
               ],
             ),
           ],
@@ -329,13 +331,13 @@ class _HackathonContentState extends State<_HackathonContent>
 
   Widget _buildAnimatedContent(BuildContext context, HackathonState state) {
     return SlideTransition(
-      position: Tween<Offset>(
-        begin: const Offset(0, 1),
-        end: Offset.zero,
-      ).animate(CurvedAnimation(
-        parent: _listController,
-        curve: Curves.easeOutCubic,
-      )),
+      position: Tween<Offset>(begin: const Offset(0, 1), end: Offset.zero)
+          .animate(
+            CurvedAnimation(
+              parent: _listController,
+              curve: Curves.easeOutCubic,
+            ),
+          ),
       child: _buildContent(context, state),
     );
   }
@@ -347,13 +349,15 @@ class _HackathonContentState extends State<_HackathonContent>
 
     if (state is HackathonListLoaded) {
       var filteredHackathons = state.hackathons;
-      
+
       if (_searchQuery.isNotEmpty) {
         filteredHackathons = filteredHackathons
-            .where((h) => h.name.toLowerCase().contains(_searchQuery.toLowerCase()))
+            .where(
+              (h) => h.name.toLowerCase().contains(_searchQuery.toLowerCase()),
+            )
             .toList();
       }
-      
+
       if (_filterStatus != 'all') {
         filteredHackathons = filteredHackathons
             .where((h) => h.status?.toLowerCase() == _filterStatus)
@@ -378,8 +382,11 @@ class _HackathonContentState extends State<_HackathonContent>
     return GridView.builder(
       padding: const EdgeInsets.all(24),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: ResponsiveUtils.isMobile(context) ? 1 : 
-                      ResponsiveUtils.isTablet(context) ? 2 : 3,
+        crossAxisCount: ResponsiveUtils.isMobile(context)
+            ? 1
+            : ResponsiveUtils.isTablet(context)
+            ? 2
+            : 3,
         crossAxisSpacing: 16,
         mainAxisSpacing: 16,
         childAspectRatio: 1.2,
@@ -388,10 +395,7 @@ class _HackathonContentState extends State<_HackathonContent>
       itemBuilder: (context, index) {
         return AppAnimations.shimmer(
           child: ModernCard(
-            child: Container(
-              height: 200,
-              color: Colors.grey[300],
-            ),
+            child: Container(height: 200, color: Colors.grey[300]),
           ),
         );
       },
@@ -404,17 +408,11 @@ class _HackathonContentState extends State<_HackathonContent>
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              Icons.event_busy,
-              size: 64,
-              color: AppColors.textSecondary,
-            ),
+            Icon(Icons.event_busy, size: 64, color: AppColors.textSecondary),
             const SizedBox(height: 16),
             Text(
               'No hackathons found',
-              style: AppTextStyles.h5.copyWith(
-                color: AppColors.textSecondary,
-              ),
+              style: AppTextStyles.h5.copyWith(color: AppColors.textSecondary),
             ),
             const SizedBox(height: 8),
             Text(
@@ -441,17 +439,11 @@ class _HackathonContentState extends State<_HackathonContent>
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              Icons.error_outline,
-              size: 64,
-              color: AppColors.error,
-            ),
+            Icon(Icons.error_outline, size: 64, color: AppColors.error),
             const SizedBox(height: 16),
             Text(
               'Error Loading Hackathons',
-              style: AppTextStyles.h5.copyWith(
-                color: AppColors.error,
-              ),
+              style: AppTextStyles.h5.copyWith(color: AppColors.error),
             ),
             const SizedBox(height: 8),
             Text(
@@ -479,8 +471,11 @@ class _HackathonContentState extends State<_HackathonContent>
     return GridView.builder(
       padding: const EdgeInsets.all(24),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: ResponsiveUtils.isMobile(context) ? 1 : 
-                      ResponsiveUtils.isTablet(context) ? 2 : 3,
+        crossAxisCount: ResponsiveUtils.isMobile(context)
+            ? 1
+            : ResponsiveUtils.isTablet(context)
+            ? 2
+            : 3,
         crossAxisSpacing: 16,
         mainAxisSpacing: 16,
         childAspectRatio: 1.2,
@@ -562,11 +557,7 @@ class _HackathonContentState extends State<_HackathonContent>
               const SizedBox(height: 8),
               Row(
                 children: [
-                  Icon(
-                    Icons.people,
-                    size: 16,
-                    color: AppColors.textSecondary,
-                  ),
+                  Icon(Icons.people, size: 16, color: AppColors.textSecondary),
                   const SizedBox(width: 4),
                   Text(
                     '${hackathon.minTeamSize}-${hackathon.maxTeamSize} per team',

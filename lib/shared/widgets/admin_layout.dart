@@ -12,7 +12,7 @@ class AdminLayout extends StatefulWidget {
   final String title;
   final List<Widget>? actions;
   final bool showBackButton;
-  
+
   const AdminLayout({
     super.key,
     required this.child,
@@ -25,7 +25,7 @@ class AdminLayout extends StatefulWidget {
   State<AdminLayout> createState() => _AdminLayoutState();
 }
 
-class _AdminLayoutState extends State<AdminLayout> 
+class _AdminLayoutState extends State<AdminLayout>
     with TickerProviderStateMixin {
   bool _sidebarCollapsed = false;
   late AnimationController _sidebarController;
@@ -61,7 +61,7 @@ class _AdminLayoutState extends State<AdminLayout>
   @override
   Widget build(BuildContext context) {
     final isMobile = ResponsiveUtils.isMobile(context);
-    
+
     if (isMobile) {
       return _buildMobileLayout();
     } else {
@@ -90,7 +90,7 @@ class _AdminLayoutState extends State<AdminLayout>
               );
             },
           ),
-          
+
           // Main Content Area
           Expanded(
             child: Column(
@@ -111,9 +111,7 @@ class _AdminLayoutState extends State<AdminLayout>
       appBar: _buildMobileAppBar(),
       drawer: Container(
         width: 280,
-        decoration: const BoxDecoration(
-          color: AppColors.white,
-        ),
+        decoration: const BoxDecoration(color: AppColors.white),
         child: _buildSidebar(),
       ),
       body: widget.child,
@@ -135,10 +133,7 @@ class _AdminLayoutState extends State<AdminLayout>
         widget.title,
         style: AppTypography.h5.copyWith(color: AppColors.gray900),
       ),
-      actions: [
-        ...?widget.actions,
-        _buildUserMenu(),
-      ],
+      actions: [...?widget.actions, _buildUserMenu()],
     );
   }
 
@@ -148,17 +143,13 @@ class _AdminLayoutState extends State<AdminLayout>
       padding: AppSpacing.horizontalLG,
       decoration: const BoxDecoration(
         color: AppColors.white,
-        border: Border(
-          bottom: BorderSide(color: AppColors.gray200, width: 1),
-        ),
+        border: Border(bottom: BorderSide(color: AppColors.gray200, width: 1)),
       ),
       child: Row(
         children: [
           IconButton(
             icon: Icon(
-              _sidebarCollapsed 
-                ? Icons.menu_open_rounded 
-                : Icons.menu_rounded,
+              _sidebarCollapsed ? Icons.menu_open_rounded : Icons.menu_rounded,
             ),
             onPressed: _toggleSidebar,
           ),
@@ -226,7 +217,7 @@ class _AdminLayoutState extends State<AdminLayout>
             ],
           ),
         ),
-        
+
         // Navigation Menu
         Expanded(
           child: Padding(
@@ -244,7 +235,7 @@ class _AdminLayoutState extends State<AdminLayout>
                   ),
                   AppSpacing.verticalGapMD,
                 ],
-                
+
                 _buildNavItem(
                   icon: Icons.dashboard_rounded,
                   title: 'Dashboard',
@@ -271,9 +262,9 @@ class _AdminLayoutState extends State<AdminLayout>
                   title: 'Analytics',
                   route: '/analytics',
                 ),
-                
+
                 AppSpacing.verticalGapLG,
-                
+
                 if (!_sidebarCollapsed) ...[
                   Text(
                     'SETTINGS',
@@ -284,7 +275,7 @@ class _AdminLayoutState extends State<AdminLayout>
                   ),
                   AppSpacing.verticalGapMD,
                 ],
-                
+
                 _buildNavItem(
                   icon: Icons.settings_rounded,
                   title: 'Settings',
@@ -299,7 +290,7 @@ class _AdminLayoutState extends State<AdminLayout>
             ),
           ),
         ),
-        
+
         // User Profile Section
         if (!_sidebarCollapsed)
           Container(
@@ -377,9 +368,9 @@ class _AdminLayoutState extends State<AdminLayout>
           child: Container(
             padding: AppSpacing.paddingMD,
             decoration: BoxDecoration(
-              color: isActive 
-                ? AppColors.primary.withOpacity(0.1)
-                : Colors.transparent,
+              color: isActive
+                  ? AppColors.primary.withOpacity(0.1)
+                  : Colors.transparent,
               borderRadius: AppBorderRadius.radiusLG,
             ),
             child: Row(
@@ -396,7 +387,9 @@ class _AdminLayoutState extends State<AdminLayout>
                       title,
                       style: AppTypography.labelMedium.copyWith(
                         color: isActive ? AppColors.primary : AppColors.gray700,
-                        fontWeight: isActive ? FontWeight.w600 : FontWeight.w500,
+                        fontWeight: isActive
+                            ? FontWeight.w600
+                            : FontWeight.w500,
                       ),
                     ),
                   ),

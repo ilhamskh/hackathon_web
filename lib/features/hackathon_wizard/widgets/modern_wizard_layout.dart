@@ -73,11 +73,7 @@ class ModernWizardLayout extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(
-                    Icons.check_circle,
-                    color: Colors.green,
-                    size: 64,
-                  ),
+                  const Icon(Icons.check_circle, color: Colors.green, size: 64),
                   const SizedBox(height: 16),
                   const Text(
                     'Hackathon Created Successfully!',
@@ -104,11 +100,7 @@ class ModernWizardLayout extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(
-                    Icons.error,
-                    color: Colors.red,
-                    size: 64,
-                  ),
+                  const Icon(Icons.error, color: Colors.red, size: 64),
                   const SizedBox(height: 16),
                   const Text(
                     'Error',
@@ -129,9 +121,7 @@ class ModernWizardLayout extends StatelessWidget {
           );
         }
 
-        return const Scaffold(
-          body: Center(child: CircularProgressIndicator()),
-        );
+        return const Scaffold(body: Center(child: CircularProgressIndicator()));
       },
     );
   }
@@ -164,12 +154,14 @@ class ModernWizardLayout extends StatelessWidget {
                 color: isActive
                     ? Theme.of(context).primaryColor
                     : isCompleted
-                        ? Colors.green
-                        : Colors.grey[300],
+                    ? Colors.green
+                    : Colors.grey[300],
               ),
               child: Icon(
                 isCompleted ? Icons.check : step.$3,
-                color: isActive || isCompleted ? Colors.white : Colors.grey[600],
+                color: isActive || isCompleted
+                    ? Colors.white
+                    : Colors.grey[600],
                 size: 18,
               ),
             ),
@@ -250,26 +242,29 @@ class ModernWizardLayout extends StatelessWidget {
     }
   }
 
-  Widget _buildGeneralInformationStep(BuildContext context, WizardStepChanged state) {
+  Widget _buildGeneralInformationStep(
+    BuildContext context,
+    WizardStepChanged state,
+  ) {
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             'General Information',
-            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 8),
           Text(
             'Provide basic information about your hackathon event.',
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-              color: Colors.grey[600],
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyLarge?.copyWith(color: Colors.grey[600]),
           ),
           const SizedBox(height: 32),
-          
+
           // Hackathon Name
           TextFormField(
             initialValue: state.hackathon.name,
@@ -294,7 +289,9 @@ class ModernWizardLayout extends StatelessWidget {
             ),
             maxLines: 4,
             onChanged: (value) {
-              context.read<WizardCubit>().updateGeneralInformation(description: value);
+              context.read<WizardCubit>().updateGeneralInformation(
+                description: value,
+              );
             },
           ),
           const SizedBox(height: 16),
@@ -313,7 +310,9 @@ class ModernWizardLayout extends StatelessWidget {
             ],
             onChanged: (value) {
               if (value != null) {
-                context.read<WizardCubit>().updateGeneralInformation(type: value);
+                context.read<WizardCubit>().updateGeneralInformation(
+                  type: value,
+                );
               }
             },
           ),
@@ -328,7 +327,9 @@ class ModernWizardLayout extends StatelessWidget {
               border: OutlineInputBorder(),
             ),
             onChanged: (value) {
-              context.read<WizardCubit>().updateGeneralInformation(themeOrFocus: value);
+              context.read<WizardCubit>().updateGeneralInformation(
+                themeOrFocus: value,
+              );
             },
           ),
         ],
@@ -337,36 +338,32 @@ class ModernWizardLayout extends StatelessWidget {
   }
 
   Widget _buildEventDetailsStep(BuildContext context, WizardStepChanged state) {
-    return const Center(
-      child: Text('Event Details Step - Coming Soon'),
-    );
+    return const Center(child: Text('Event Details Step - Coming Soon'));
   }
 
-  Widget _buildParticipantSettingsStep(BuildContext context, WizardStepChanged state) {
-    return const Center(
-      child: Text('Participant Settings Step - Coming Soon'),
-    );
+  Widget _buildParticipantSettingsStep(
+    BuildContext context,
+    WizardStepChanged state,
+  ) {
+    return const Center(child: Text('Participant Settings Step - Coming Soon'));
   }
 
-  Widget _buildJudgeConfigurationStep(BuildContext context, WizardStepChanged state) {
-    return const Center(
-      child: Text('Judge Configuration Step - Coming Soon'),
-    );
+  Widget _buildJudgeConfigurationStep(
+    BuildContext context,
+    WizardStepChanged state,
+  ) {
+    return const Center(child: Text('Judge Configuration Step - Coming Soon'));
   }
 
   Widget _buildReviewStep(BuildContext context, WizardStepChanged state) {
-    return const Center(
-      child: Text('Review & Submit Step - Coming Soon'),
-    );
+    return const Center(child: Text('Review & Submit Step - Coming Soon'));
   }
 
   Widget _buildBottomNavigation(BuildContext context, WizardStepChanged state) {
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        border: Border(
-          top: BorderSide(color: Theme.of(context).dividerColor),
-        ),
+        border: Border(top: BorderSide(color: Theme.of(context).dividerColor)),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -381,7 +378,7 @@ class ModernWizardLayout extends StatelessWidget {
             )
           else
             const SizedBox.shrink(),
-          
+
           if (state.currentStep == WizardStep.reviewAndSubmit)
             ElevatedButton.icon(
               onPressed: () {

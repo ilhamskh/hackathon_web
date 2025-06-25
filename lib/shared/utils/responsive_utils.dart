@@ -135,12 +135,7 @@ class ResponsiveUtils {
 
   // Get responsive cross axis count for grids
   static int getResponsiveCrossAxisCount(BuildContext context) {
-    return getResponsiveValue(
-      context,
-      mobile: 1,
-      tablet: 2,
-      desktop: 3,
-    );
+    return getResponsiveValue(context, mobile: 1, tablet: 2, desktop: 3);
   }
 
   // Get responsive container width
@@ -155,8 +150,4 @@ class ResponsiveUtils {
   }
 }
 
-enum ScreenType {
-  mobile,
-  tablet,
-  desktop,
-}
+enum ScreenType { mobile, tablet, desktop }

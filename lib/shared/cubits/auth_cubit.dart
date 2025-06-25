@@ -65,22 +65,19 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> login(String email, String password) async {
     emit(AuthLoading());
-    
+
     try {
       final response = await _httpService.post<Map<String, dynamic>>(
         '/auth/login',
-        data: {
-          'email': email,
-          'password': password,
-        },
+        data: {'email': email, 'password': password},
       );
 
       if (response.success && response.data != null) {
         final token = response.data!['access_token'] as String;
         final userData = response.data!['user'] as Map<String, dynamic>;
-        
+
         await _httpService.setAuthToken(token);
-        
+
         final user = User.fromJson(userData);
         _userSubject.add(user);
         emit(AuthAuthenticated(user));
@@ -99,7 +96,7 @@ class AuthCubit extends Cubit<AuthState> {
     required String role,
   }) async {
     emit(AuthLoading());
-    
+
     try {
       final response = await _httpService.post<Map<String, dynamic>>(
         '/auth/register',
@@ -114,9 +111,9 @@ class AuthCubit extends Cubit<AuthState> {
       if (response.success && response.data != null) {
         final token = response.data!['access_token'] as String;
         final userData = response.data!['user'] as Map<String, dynamic>;
-        
+
         await _httpService.setAuthToken(token);
-        
+
         final user = User.fromJson(userData);
         _userSubject.add(user);
         emit(AuthAuthenticated(user));
@@ -147,14 +144,11 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  Future<void> updateProfile({
-    String? name,
-    String? email,
-  }) async {
+  Future<void> updateProfile({String? name, String? email}) async {
     if (currentUser == null) return;
 
     emit(AuthLoading());
-    
+
     try {
       final response = await _httpService.put<Map<String, dynamic>>(
         '/auth/profile',
@@ -190,7 +184,7 @@ class AuthCubit extends Cubit<AuthState> {
     if (currentUser == null) return;
 
     emit(AuthLoading());
-    
+
     try {
       final response = await _httpService.put<Map<String, dynamic>>(
         '/auth/change-password',
@@ -220,7 +214,7 @@ class AuthCubit extends Cubit<AuthState> {
     } catch (e) {
       // Ignore logout API errors
     }
-    
+
     await _httpService.logout();
     _userSubject.add(null);
     emit(AuthUnauthenticated());
@@ -228,10 +222,7 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> forgotPassword(String email) async {
     try {
-      await _httpService.post(
-        '/auth/forgot-password',
-        data: {'email': email},
-      );
+      await _httpService.post('/auth/forgot-password', data: {'email': email});
     } catch (e) {
       // Handle forgot password errors
       throw Exception('Failed to send reset email');

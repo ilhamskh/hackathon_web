@@ -23,7 +23,7 @@ class AppTheme {
         onError: AppColors.white,
         outline: AppColors.gray300,
       ),
-      
+
       // AppBar Theme
       appBarTheme: const AppBarTheme(
         elevation: 0,
@@ -33,18 +33,16 @@ class AppTheme {
         toolbarHeight: 72,
         centerTitle: false,
       ),
-      
+
       // Card Theme
       cardTheme: CardThemeData(
         elevation: AppElevation.sm,
         color: AppColors.white,
         shadowColor: AppColors.shadowLight,
-        shape: RoundedRectangleBorder(
-          borderRadius: AppBorderRadius.radiusLG,
-        ),
+        shape: RoundedRectangleBorder(borderRadius: AppBorderRadius.radiusLG),
         margin: AppSpacing.marginMD,
       ),
-      
+
       // Button Themes
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
@@ -52,9 +50,7 @@ class AppTheme {
           foregroundColor: AppColors.white,
           elevation: AppElevation.sm,
           shadowColor: AppColors.shadowMedium,
-          shape: RoundedRectangleBorder(
-            borderRadius: AppBorderRadius.radiusLG,
-          ),
+          shape: RoundedRectangleBorder(borderRadius: AppBorderRadius.radiusLG),
           padding: const EdgeInsets.symmetric(
             horizontal: AppSpacing.lg,
             vertical: AppSpacing.md,
@@ -63,14 +59,12 @@ class AppTheme {
           minimumSize: const Size(120, 48),
         ),
       ),
-      
+
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           foregroundColor: AppColors.primary,
           side: const BorderSide(color: AppColors.primary, width: 1.5),
-          shape: RoundedRectangleBorder(
-            borderRadius: AppBorderRadius.radiusLG,
-          ),
+          shape: RoundedRectangleBorder(borderRadius: AppBorderRadius.radiusLG),
           padding: const EdgeInsets.symmetric(
             horizontal: AppSpacing.lg,
             vertical: AppSpacing.md,
@@ -79,13 +73,11 @@ class AppTheme {
           minimumSize: const Size(120, 48),
         ),
       ),
-      
+
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           foregroundColor: AppColors.primary,
-          shape: RoundedRectangleBorder(
-            borderRadius: AppBorderRadius.radiusLG,
-          ),
+          shape: RoundedRectangleBorder(borderRadius: AppBorderRadius.radiusLG),
           padding: const EdgeInsets.symmetric(
             horizontal: AppSpacing.lg,
             vertical: AppSpacing.md,
@@ -94,7 +86,7 @@ class AppTheme {
           minimumSize: const Size(120, 48),
         ),
       ),
-      
+
       // Input Decoration Theme
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
@@ -120,14 +112,16 @@ class AppTheme {
           borderSide: const BorderSide(color: AppColors.error, width: 2),
         ),
         contentPadding: AppSpacing.paddingMD,
-        labelStyle: AppTypography.labelMedium.copyWith(color: AppColors.gray600),
+        labelStyle: AppTypography.labelMedium.copyWith(
+          color: AppColors.gray600,
+        ),
         hintStyle: AppTypography.bodyMedium.copyWith(color: AppColors.gray400),
         errorStyle: AppTypography.labelSmall.copyWith(color: AppColors.error),
       ),
-      
+
       // Scaffold Theme
       scaffoldBackgroundColor: AppColors.gray50,
-      
+
       // Text Theme
       textTheme: const TextTheme(
         displayLarge: AppTypography.h1,
@@ -146,20 +140,17 @@ class AppTheme {
         labelMedium: AppTypography.labelMedium,
         labelSmall: AppTypography.labelSmall,
       ),
-      
+
       // Icon Theme
-      iconTheme: const IconThemeData(
-        color: AppColors.gray600,
-        size: 24,
-      ),
-      
+      iconTheme: const IconThemeData(color: AppColors.gray600, size: 24),
+
       // Divider Theme
       dividerTheme: const DividerThemeData(
         color: AppColors.gray200,
         thickness: 1,
         space: 1,
       ),
-      
+
       // Chip Theme
       chipTheme: ChipThemeData(
         backgroundColor: AppColors.gray100,
@@ -167,13 +158,11 @@ class AppTheme {
         deleteIconColor: AppColors.gray500,
         labelStyle: AppTypography.labelSmall,
         padding: AppSpacing.paddingSM,
-        shape: RoundedRectangleBorder(
-          borderRadius: AppBorderRadius.radiusFull,
-        ),
+        shape: RoundedRectangleBorder(borderRadius: AppBorderRadius.radiusFull),
       ),
     );
   }
-  
+
   static ThemeData get darkTheme {
     return ThemeData(
       useMaterial3: false,
@@ -193,7 +182,7 @@ class AppTheme {
         onError: AppColors.white,
         outline: AppColors.darkBorder,
       ),
-      
+
       // AppBar Theme
       appBarTheme: const AppBarTheme(
         elevation: 0,
@@ -203,21 +192,19 @@ class AppTheme {
         toolbarHeight: 72,
         centerTitle: false,
       ),
-      
+
       // Card Theme
       cardTheme: CardThemeData(
         elevation: AppElevation.sm,
         color: AppColors.darkCard,
         shadowColor: AppColors.shadowHeavy,
-        shape: RoundedRectangleBorder(
-          borderRadius: AppBorderRadius.radiusLG,
-        ),
+        shape: RoundedRectangleBorder(borderRadius: AppBorderRadius.radiusLG),
         margin: AppSpacing.marginMD,
       ),
-      
+
       // Scaffold Theme
       scaffoldBackgroundColor: AppColors.darkBackground,
-      
+
       // Input Decoration Theme
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
@@ -235,16 +222,15 @@ class AppTheme {
           borderSide: const BorderSide(color: AppColors.primaryLight, width: 2),
         ),
         contentPadding: AppSpacing.paddingMD,
-        labelStyle: AppTypography.labelMedium.copyWith(color: AppColors.gray400),
+        labelStyle: AppTypography.labelMedium.copyWith(
+          color: AppColors.gray400,
+        ),
         hintStyle: AppTypography.bodyMedium.copyWith(color: AppColors.gray500),
       ),
-      
+
       // Icon Theme
-      iconTheme: const IconThemeData(
-        color: AppColors.gray300,
-        size: 24,
-      ),
-      
+      iconTheme: const IconThemeData(color: AppColors.gray300, size: 24),
+
       // Divider Theme
       dividerTheme: const DividerThemeData(
         color: AppColors.darkBorder,

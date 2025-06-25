@@ -13,37 +13,58 @@ class AppAnimations {
   static const Curve smoothCurve = Curves.easeOutQuart;
 
   // Slide animations
-  static Widget slideInFromLeft(Widget child, {Duration? duration, Curve? curve}) {
+  static Widget slideInFromLeft(
+    Widget child, {
+    Duration? duration,
+    Curve? curve,
+  }) {
     return TweenAnimationBuilder<Offset>(
       duration: duration ?? normal,
       curve: curve ?? defaultCurve,
       tween: Tween(begin: const Offset(-1.0, 0.0), end: Offset.zero),
       builder: (context, offset, child) {
-        return SlideTransition(position: AlwaysStoppedAnimation(offset), child: child!);
+        return SlideTransition(
+          position: AlwaysStoppedAnimation(offset),
+          child: child!,
+        );
       },
       child: child,
     );
   }
 
-  static Widget slideInFromRight(Widget child, {Duration? duration, Curve? curve}) {
+  static Widget slideInFromRight(
+    Widget child, {
+    Duration? duration,
+    Curve? curve,
+  }) {
     return TweenAnimationBuilder<Offset>(
       duration: duration ?? normal,
       curve: curve ?? defaultCurve,
       tween: Tween(begin: const Offset(1.0, 0.0), end: Offset.zero),
       builder: (context, offset, child) {
-        return SlideTransition(position: AlwaysStoppedAnimation(offset), child: child!);
+        return SlideTransition(
+          position: AlwaysStoppedAnimation(offset),
+          child: child!,
+        );
       },
       child: child,
     );
   }
 
-  static Widget slideInFromBottom(Widget child, {Duration? duration, Curve? curve}) {
+  static Widget slideInFromBottom(
+    Widget child, {
+    Duration? duration,
+    Curve? curve,
+  }) {
     return TweenAnimationBuilder<Offset>(
       duration: duration ?? normal,
       curve: curve ?? defaultCurve,
       tween: Tween(begin: const Offset(0.0, 1.0), end: Offset.zero),
       builder: (context, offset, child) {
-        return SlideTransition(position: AlwaysStoppedAnimation(offset), child: child!);
+        return SlideTransition(
+          position: AlwaysStoppedAnimation(offset),
+          child: child!,
+        );
       },
       child: child,
     );
@@ -85,7 +106,7 @@ class AppAnimations {
       children: children.asMap().entries.map((entry) {
         int index = entry.key;
         Widget child = entry.value;
-        
+
         return TweenAnimationBuilder<double>(
           duration: (duration ?? normal) + Duration(milliseconds: index * 100),
           curve: defaultCurve,
@@ -93,10 +114,7 @@ class AppAnimations {
           builder: (context, value, child) {
             return Transform.translate(
               offset: Offset(0, 50 * (1 - value)),
-              child: Opacity(
-                opacity: value,
-                child: child!,
-              ),
+              child: Opacity(opacity: value, child: child!),
             );
           },
           child: child,
@@ -125,11 +143,7 @@ class AppAnimations {
                 highlightColor ?? Colors.grey[100]!,
                 baseColor ?? Colors.grey[300]!,
               ],
-              stops: [
-                0.0,
-                value,
-                1.0,
-              ],
+              stops: [0.0, value, 1.0],
             ).createShader(bounds);
           },
           child: child!,

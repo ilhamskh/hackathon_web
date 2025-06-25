@@ -16,11 +16,7 @@ class ApiResponse<T> {
   // Convenience getter
   bool get isSuccess => success;
 
-  factory ApiResponse.success({
-    T? data,
-    String? message,
-    int? statusCode,
-  }) {
+  factory ApiResponse.success({T? data, String? message, int? statusCode}) {
     return ApiResponse<T>(
       success: true,
       data: data,
@@ -49,9 +45,9 @@ class ApiResponse<T> {
     return ApiResponse<T>(
       success: json['success'] as bool? ?? false,
       message: json['message'] as String?,
-      data: json['data'] != null && fromJsonT != null 
-        ? fromJsonT(json['data'])
-        : json['data'] as T?,
+      data: json['data'] != null && fromJsonT != null
+          ? fromJsonT(json['data'])
+          : json['data'] as T?,
       statusCode: json['status_code'] as int?,
       errors: json['errors'] as Map<String, dynamic>?,
     );

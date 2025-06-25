@@ -6,10 +6,10 @@ import 'features/simple_dashboard.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   // Setup dependencies
   await setupDependencies();
-  
+
   runApp(const MyApp());
 }
 

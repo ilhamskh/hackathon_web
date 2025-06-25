@@ -184,9 +184,7 @@ class SimpleDashboard extends StatelessWidget {
       children: [
         Text(
           'Quick Actions',
-          style: AppTextStyles.h5.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+          style: AppTextStyles.h5.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 16),
         Row(
@@ -236,9 +234,7 @@ class SimpleDashboard extends StatelessWidget {
       children: [
         Text(
           'Recent Activity',
-          style: AppTextStyles.h5.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+          style: AppTextStyles.h5.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 16),
         ModernCard(
@@ -257,10 +253,7 @@ class SimpleDashboard extends StatelessWidget {
                         size: 20,
                       ),
                     ),
-                    title: Text(
-                      activity,
-                      style: AppTextStyles.bodyMedium,
-                    ),
+                    title: Text(activity, style: AppTextStyles.bodyMedium),
                     subtitle: Text(
                       '${index + 1} hour${index == 0 ? '' : 's'} ago',
                       style: AppTextStyles.bodySmall.copyWith(
@@ -305,7 +298,9 @@ class SimpleDashboard extends StatelessWidget {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Create New Hackathon'),
-        content: const Text('Would you like to start the hackathon creation wizard?'),
+        content: const Text(
+          'Would you like to start the hackathon creation wizard?',
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),

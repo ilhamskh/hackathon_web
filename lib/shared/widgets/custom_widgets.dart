@@ -25,24 +25,27 @@ class ModernCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    
+
     return Container(
       padding: padding ?? const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: gradient == null 
-            ? (backgroundColor ?? (isDark ? AppColors.cardDark : AppColors.cardLight))
+        color: gradient == null
+            ? (backgroundColor ??
+                  (isDark ? AppColors.cardDark : AppColors.cardLight))
             : null,
         gradient: gradient,
         borderRadius: BorderRadius.circular(borderRadius ?? 12),
-        boxShadow: boxShadow ?? [
-          BoxShadow(
-            color: isDark 
-                ? AppColors.black.withOpacity(0.3)
-                : AppColors.grey300.withOpacity(0.1),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        boxShadow:
+            boxShadow ??
+            [
+              BoxShadow(
+                color: isDark
+                    ? AppColors.black.withOpacity(0.3)
+                    : AppColors.grey300.withOpacity(0.1),
+                blurRadius: 8,
+                offset: const Offset(0, 2),
+              ),
+            ],
         border: border,
       ),
       child: child,
@@ -69,16 +72,16 @@ class GlassCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    
+
     return Container(
       padding: padding ?? const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: isDark 
+        color: isDark
             ? AppColors.white.withOpacity(opacity)
             : AppColors.black.withOpacity(opacity),
         borderRadius: BorderRadius.circular(borderRadius ?? 16),
         border: Border.all(
-          color: isDark 
+          color: isDark
               ? AppColors.white.withOpacity(0.2)
               : AppColors.black.withOpacity(0.1),
           width: 1,
@@ -121,7 +124,6 @@ class ModernButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     Widget buttonChild = isLoading
         ? SizedBox(
             height: 20,
@@ -159,7 +161,9 @@ class ModernButton extends StatelessWidget {
       return OutlinedButton(
         onPressed: isLoading ? null : onPressed,
         style: OutlinedButton.styleFrom(
-          padding: padding ?? const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          padding:
+              padding ??
+              const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius ?? 8),
           ),
@@ -180,9 +184,13 @@ class ModernButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: isLoading ? null : onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: gradient == null ? (backgroundColor ?? AppColors.primary) : Colors.transparent,
+          backgroundColor: gradient == null
+              ? (backgroundColor ?? AppColors.primary)
+              : Colors.transparent,
           foregroundColor: textColor ?? AppColors.white,
-          padding: padding ?? const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          padding:
+              padding ??
+              const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius ?? 8),
           ),
@@ -228,7 +236,7 @@ class ModernTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -236,7 +244,9 @@ class ModernTextField extends StatelessWidget {
           Text(
             label!,
             style: AppTextStyles.labelMedium.copyWith(
-              color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondary,
+              color: isDark
+                  ? AppColors.textSecondaryDark
+                  : AppColors.textSecondary,
             ),
           ),
           const SizedBox(height: 8),
@@ -255,25 +265,31 @@ class ModernTextField extends StatelessWidget {
           decoration: InputDecoration(
             hintText: hint,
             hintStyle: AppTextStyles.bodyMedium.copyWith(
-              color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondary,
+              color: isDark
+                  ? AppColors.textSecondaryDark
+                  : AppColors.textSecondary,
             ),
             prefixIcon: prefixIcon != null
                 ? Icon(
                     prefixIcon,
-                    color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondary,
+                    color: isDark
+                        ? AppColors.textSecondaryDark
+                        : AppColors.textSecondary,
                   )
                 : null,
             suffixIcon: suffixIcon != null
                 ? IconButton(
                     icon: Icon(
                       suffixIcon,
-                      color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondary,
+                      color: isDark
+                          ? AppColors.textSecondaryDark
+                          : AppColors.textSecondary,
                     ),
                     onPressed: onSuffixIconPressed,
                   )
                 : null,
             filled: true,
-            fillColor: isDark 
+            fillColor: isDark
                 ? AppColors.surfaceDark.withOpacity(0.7)
                 : AppColors.surfaceLight,
             border: OutlineInputBorder(
@@ -283,24 +299,23 @@ class ModernTextField extends StatelessWidget {
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
               borderSide: BorderSide(
-                color: isDark ? AppColors.grey400.withOpacity(0.3) : AppColors.grey200.withOpacity(0.7),
+                color: isDark
+                    ? AppColors.grey400.withOpacity(0.3)
+                    : AppColors.grey200.withOpacity(0.7),
               ),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(
-                color: AppColors.primary,
-                width: 2,
-              ),
+              borderSide: const BorderSide(color: AppColors.primary, width: 2),
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(
-                color: AppColors.error,
-                width: 1,
-              ),
+              borderSide: const BorderSide(color: AppColors.error, width: 1),
             ),
-            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 16,
+            ),
           ),
         ),
       ],
@@ -335,7 +350,7 @@ class StatCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    
+
     return ModernCard(
       child: InkWell(
         onTap: onTap,
@@ -375,7 +390,9 @@ class StatCard extends StatelessWidget {
               Text(
                 title,
                 style: AppTextStyles.bodyMedium.copyWith(
-                  color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondary,
+                  color: isDark
+                      ? AppColors.textSecondaryDark
+                      : AppColors.textSecondary,
                 ),
               ),
               if (trend != null) ...[
@@ -409,7 +426,9 @@ class StatCard extends StatelessWidget {
                 Text(
                   subtitle!,
                   style: AppTextStyles.bodySmall.copyWith(
-                    color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondary,
+                    color: isDark
+                        ? AppColors.textSecondaryDark
+                        : AppColors.textSecondary,
                   ),
                 ),
               ],
@@ -457,7 +476,7 @@ class _ModernDateTimePickerState extends State<ModernDateTimePicker>
   late AnimationController _animationController;
   late Animation<Color?> _borderColorAnimation;
   late Animation<double> _scaleAnimation;
-  
+
   bool _isFocused = false;
   String? _errorText;
 
@@ -468,22 +487,18 @@ class _ModernDateTimePickerState extends State<ModernDateTimePicker>
       duration: const Duration(milliseconds: 200),
       vsync: this,
     );
-    
-    _borderColorAnimation = ColorTween(
-      begin: AppColors.grey300,
-      end: AppColors.primary,
-    ).animate(CurvedAnimation(
-      parent: _animationController,
-      curve: Curves.easeInOut,
-    ));
-    
-    _scaleAnimation = Tween<double>(
-      begin: 1.0,
-      end: 1.02,
-    ).animate(CurvedAnimation(
-      parent: _animationController,
-      curve: Curves.easeInOut,
-    ));
+
+    _borderColorAnimation =
+        ColorTween(begin: AppColors.grey300, end: AppColors.primary).animate(
+          CurvedAnimation(
+            parent: _animationController,
+            curve: Curves.easeInOut,
+          ),
+        );
+
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 1.02).animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
+    );
   }
 
   @override
@@ -505,12 +520,20 @@ class _ModernDateTimePickerState extends State<ModernDateTimePicker>
       case DateTimePickerMode.date:
         return '${dateTime.day}/${dateTime.month}/${dateTime.year}';
       case DateTimePickerMode.time:
-        final hour = dateTime.hour == 0 ? 12 : dateTime.hour > 12 ? dateTime.hour - 12 : dateTime.hour;
+        final hour = dateTime.hour == 0
+            ? 12
+            : dateTime.hour > 12
+            ? dateTime.hour - 12
+            : dateTime.hour;
         final minute = dateTime.minute.toString().padLeft(2, '0');
         final period = dateTime.hour >= 12 ? 'PM' : 'AM';
         return '$hour:$minute $period';
       case DateTimePickerMode.dateTime:
-        final hour = dateTime.hour == 0 ? 12 : dateTime.hour > 12 ? dateTime.hour - 12 : dateTime.hour;
+        final hour = dateTime.hour == 0
+            ? 12
+            : dateTime.hour > 12
+            ? dateTime.hour - 12
+            : dateTime.hour;
         final minute = dateTime.minute.toString().padLeft(2, '0');
         final period = dateTime.hour >= 12 ? 'PM' : 'AM';
         return '${dateTime.day}/${dateTime.month}/${dateTime.year} $hour:$minute $period';
@@ -541,9 +564,9 @@ class _ModernDateTimePickerState extends State<ModernDateTimePicker>
       builder: (context, child) {
         return Theme(
           data: Theme.of(context).copyWith(
-            colorScheme: Theme.of(context).colorScheme.copyWith(
-              primary: AppColors.primary,
-            ),
+            colorScheme: Theme.of(
+              context,
+            ).colorScheme.copyWith(primary: AppColors.primary),
           ),
           child: child!,
         );
@@ -564,15 +587,15 @@ class _ModernDateTimePickerState extends State<ModernDateTimePicker>
   void _showTimePicker(BuildContext context) async {
     final time = await showTimePicker(
       context: context,
-      initialTime: widget.value != null 
+      initialTime: widget.value != null
           ? TimeOfDay.fromDateTime(widget.value!)
           : TimeOfDay.now(),
       builder: (context, child) {
         return Theme(
           data: Theme.of(context).copyWith(
-            colorScheme: Theme.of(context).colorScheme.copyWith(
-              primary: AppColors.primary,
-            ),
+            colorScheme: Theme.of(
+              context,
+            ).colorScheme.copyWith(primary: AppColors.primary),
           ),
           child: child!,
         );
@@ -608,9 +631,9 @@ class _ModernDateTimePickerState extends State<ModernDateTimePicker>
       builder: (context, child) {
         return Theme(
           data: Theme.of(context).copyWith(
-            colorScheme: Theme.of(context).colorScheme.copyWith(
-              primary: AppColors.primary,
-            ),
+            colorScheme: Theme.of(
+              context,
+            ).colorScheme.copyWith(primary: AppColors.primary),
           ),
           child: child!,
         );
@@ -620,15 +643,15 @@ class _ModernDateTimePickerState extends State<ModernDateTimePicker>
     if (date != null) {
       final time = await showTimePicker(
         context: context,
-        initialTime: widget.value != null 
+        initialTime: widget.value != null
             ? TimeOfDay.fromDateTime(widget.value!)
             : TimeOfDay.now(),
         builder: (context, child) {
           return Theme(
             data: Theme.of(context).copyWith(
-              colorScheme: Theme.of(context).colorScheme.copyWith(
-                primary: AppColors.primary,
-              ),
+              colorScheme: Theme.of(
+                context,
+              ).colorScheme.copyWith(primary: AppColors.primary),
             ),
             child: child!,
           );
@@ -657,7 +680,7 @@ class _ModernDateTimePickerState extends State<ModernDateTimePicker>
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -667,7 +690,9 @@ class _ModernDateTimePickerState extends State<ModernDateTimePicker>
             text: TextSpan(
               text: widget.label,
               style: AppTextStyles.labelMedium.copyWith(
-                color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondary,
+                color: isDark
+                    ? AppColors.textSecondaryDark
+                    : AppColors.textSecondary,
                 fontWeight: FontWeight.w500,
               ),
               children: [
@@ -691,15 +716,19 @@ class _ModernDateTimePickerState extends State<ModernDateTimePicker>
             return Transform.scale(
               scale: _scaleAnimation.value,
               child: GestureDetector(
-                onTap: widget.enabled ? () => _showDateTimePicker(context) : null,
+                onTap: widget.enabled
+                    ? () => _showDateTimePicker(context)
+                    : null,
                 child: Container(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 16,
                     vertical: 16,
                   ),
                   decoration: BoxDecoration(
-                    color: widget.enabled 
-                        ? (isDark ? AppColors.surfaceDark : AppColors.surfaceLight)
+                    color: widget.enabled
+                        ? (isDark
+                              ? AppColors.surfaceDark
+                              : AppColors.surfaceLight)
                         : AppColors.grey100,
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
@@ -711,10 +740,11 @@ class _ModernDateTimePickerState extends State<ModernDateTimePicker>
                     boxShadow: _isFocused
                         ? [
                             BoxShadow(
-                              color: (widget.value != null
-                                      ? AppColors.primary
-                                      : AppColors.grey400)
-                                  .withOpacity(0.1),
+                              color:
+                                  (widget.value != null
+                                          ? AppColors.primary
+                                          : AppColors.grey400)
+                                      .withOpacity(0.1),
                               blurRadius: 8,
                               offset: const Offset(0, 2),
                             ),
@@ -728,10 +758,11 @@ class _ModernDateTimePickerState extends State<ModernDateTimePicker>
                         duration: const Duration(milliseconds: 200),
                         padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
-                          color: (widget.value != null
-                                  ? AppColors.primary
-                                  : AppColors.grey400)
-                              .withOpacity(0.1),
+                          color:
+                              (widget.value != null
+                                      ? AppColors.primary
+                                      : AppColors.grey400)
+                                  .withOpacity(0.1),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Icon(
@@ -745,18 +776,22 @@ class _ModernDateTimePickerState extends State<ModernDateTimePicker>
                         ),
                       ),
                       const SizedBox(width: 12),
-                      
+
                       // Value or Hint Text
                       Expanded(
                         child: AnimatedDefaultTextStyle(
                           duration: const Duration(milliseconds: 200),
                           style: widget.value != null
                               ? AppTextStyles.bodyMedium.copyWith(
-                                  color: isDark ? AppColors.textDark : AppColors.textPrimary,
+                                  color: isDark
+                                      ? AppColors.textDark
+                                      : AppColors.textPrimary,
                                   fontWeight: FontWeight.w500,
                                 )
                               : AppTextStyles.bodyMedium.copyWith(
-                                  color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondary,
+                                  color: isDark
+                                      ? AppColors.textSecondaryDark
+                                      : AppColors.textSecondary,
                                 ),
                           child: Text(
                             widget.value != null
@@ -765,14 +800,16 @@ class _ModernDateTimePickerState extends State<ModernDateTimePicker>
                           ),
                         ),
                       ),
-                      
+
                       // Arrow Icon
                       AnimatedRotation(
                         duration: const Duration(milliseconds: 200),
                         turns: _isFocused ? 0.5 : 0,
                         child: Icon(
                           Icons.keyboard_arrow_down_rounded,
-                          color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondary,
+                          color: isDark
+                              ? AppColors.textSecondaryDark
+                              : AppColors.textSecondary,
                           size: 24,
                         ),
                       ),
@@ -789,11 +826,7 @@ class _ModernDateTimePickerState extends State<ModernDateTimePicker>
           const SizedBox(height: 8),
           Row(
             children: [
-              Icon(
-                Icons.error_outline,
-                color: AppColors.error,
-                size: 16,
-              ),
+              Icon(Icons.error_outline, color: AppColors.error, size: 16),
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
@@ -812,8 +845,4 @@ class _ModernDateTimePickerState extends State<ModernDateTimePicker>
 }
 
 // Enum for DateTimePicker modes
-enum DateTimePickerMode {
-  date,
-  time,
-  dateTime,
-}
+enum DateTimePickerMode { date, time, dateTime }

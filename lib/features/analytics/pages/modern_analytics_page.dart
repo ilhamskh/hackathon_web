@@ -28,9 +28,10 @@ class _ModernAnalyticsPageState extends State<ModernAnalyticsPage>
       duration: const Duration(milliseconds: 1200),
       vsync: this,
     );
-    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-    );
+    _fadeAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
     _controller.forward();
   }
 
@@ -82,7 +83,7 @@ class _AnalyticsView extends StatelessWidget {
         icon: Icons.analytics_rounded,
         route: '/analytics',
       ),
-      
+
       SidebarItem.category('Management'),
       const SidebarItem(
         title: 'Hackathons',
@@ -131,7 +132,7 @@ class _AnalyticsContentState extends State<_AnalyticsContent>
       duration: const Duration(milliseconds: 800),
       vsync: this,
     );
-    
+
     _metricsController.forward();
     Future.delayed(const Duration(milliseconds: 300), () {
       _chartController.forward();
@@ -156,9 +157,7 @@ class _AnalyticsContentState extends State<_AnalyticsContent>
           body: Column(
             children: [
               _buildAnimatedHeader(context),
-              Expanded(
-                child: _buildAnalyticsContent(context, state),
-              ),
+              Expanded(child: _buildAnalyticsContent(context, state)),
             ],
           ),
         );
@@ -168,13 +167,13 @@ class _AnalyticsContentState extends State<_AnalyticsContent>
 
   Widget _buildAnimatedHeader(BuildContext context) {
     return SlideTransition(
-      position: Tween<Offset>(
-        begin: const Offset(0, -1),
-        end: Offset.zero,
-      ).animate(CurvedAnimation(
-        parent: _metricsController,
-        curve: Curves.easeOutCubic,
-      )),
+      position: Tween<Offset>(begin: const Offset(0, -1), end: Offset.zero)
+          .animate(
+            CurvedAnimation(
+              parent: _metricsController,
+              curve: Curves.easeOutCubic,
+            ),
+          ),
       child: Container(
         padding: const EdgeInsets.all(24),
         decoration: BoxDecoration(
@@ -342,9 +341,10 @@ class _AnalyticsContentState extends State<_AnalyticsContent>
           builder: (context, child) {
             final delay = index * 0.1;
             final animationValue = Curves.easeOutBack.transform(
-              (_metricsController.value - delay).clamp(0.0, 1.0) / (1.0 - delay),
+              (_metricsController.value - delay).clamp(0.0, 1.0) /
+                  (1.0 - delay),
             );
-            
+
             return Transform.scale(
               scale: animationValue,
               child: Transform.translate(
@@ -376,15 +376,14 @@ class _AnalyticsContentState extends State<_AnalyticsContent>
                     color: (metric['color'] as Color).withOpacity(0.1),
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: Icon(
-                    metric['icon'],
-                    color: metric['color'],
-                    size: 20,
-                  ),
+                  child: Icon(metric['icon'], color: metric['color'], size: 20),
                 ),
                 const Spacer(),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 4,
+                  ),
                   decoration: BoxDecoration(
                     color: metric['isPositive']
                         ? AppColors.success.withOpacity(0.1)
@@ -395,15 +394,21 @@ class _AnalyticsContentState extends State<_AnalyticsContent>
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Icon(
-                        metric['isPositive'] ? Icons.trending_up : Icons.trending_down,
+                        metric['isPositive']
+                            ? Icons.trending_up
+                            : Icons.trending_down,
                         size: 12,
-                        color: metric['isPositive'] ? AppColors.success : AppColors.error,
+                        color: metric['isPositive']
+                            ? AppColors.success
+                            : AppColors.error,
                       ),
                       const SizedBox(width: 4),
                       Text(
                         metric['trend'],
                         style: AppTextStyles.bodySmall.copyWith(
-                          color: metric['isPositive'] ? AppColors.success : AppColors.error,
+                          color: metric['isPositive']
+                              ? AppColors.success
+                              : AppColors.error,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -415,9 +420,7 @@ class _AnalyticsContentState extends State<_AnalyticsContent>
             const SizedBox(height: 16),
             Text(
               metric['value'],
-              style: AppTextStyles.h3.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+              style: AppTextStyles.h3.copyWith(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 4),
             Text(
@@ -438,26 +441,29 @@ class _AnalyticsContentState extends State<_AnalyticsContent>
         Expanded(
           flex: 2,
           child: SlideTransition(
-            position: Tween<Offset>(
-              begin: const Offset(-1, 0),
-              end: Offset.zero,
-            ).animate(CurvedAnimation(
-              parent: _chartController,
-              curve: Curves.easeOutCubic,
-            )),
+            position:
+                Tween<Offset>(
+                  begin: const Offset(-1, 0),
+                  end: Offset.zero,
+                ).animate(
+                  CurvedAnimation(
+                    parent: _chartController,
+                    curve: Curves.easeOutCubic,
+                  ),
+                ),
             child: _buildRegistrationChart(),
           ),
         ),
         const SizedBox(width: 16),
         Expanded(
           child: SlideTransition(
-            position: Tween<Offset>(
-              begin: const Offset(1, 0),
-              end: Offset.zero,
-            ).animate(CurvedAnimation(
-              parent: _chartController,
-              curve: Curves.easeOutCubic,
-            )),
+            position: Tween<Offset>(begin: const Offset(1, 0), end: Offset.zero)
+                .animate(
+                  CurvedAnimation(
+                    parent: _chartController,
+                    curve: Curves.easeOutCubic,
+                  ),
+                ),
             child: _buildEventTypesChart(),
           ),
         ),
@@ -476,16 +482,10 @@ class _AnalyticsContentState extends State<_AnalyticsContent>
               children: [
                 Text(
                   'Registration Trends',
-                  style: AppTextStyles.h6.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: AppTextStyles.h6.copyWith(fontWeight: FontWeight.bold),
                 ),
                 const Spacer(),
-                Icon(
-                  Icons.trending_up,
-                  color: AppColors.success,
-                  size: 20,
-                ),
+                Icon(Icons.trending_up, color: AppColors.success, size: 20),
                 const SizedBox(width: 4),
                 Text(
                   '+24.5%',
@@ -497,10 +497,7 @@ class _AnalyticsContentState extends State<_AnalyticsContent>
               ],
             ),
             const SizedBox(height: 24),
-            SizedBox(
-              height: 200,
-              child: _buildAnimatedLineChart(),
-            ),
+            SizedBox(height: 200, child: _buildAnimatedLineChart()),
           ],
         ),
       ),
@@ -528,15 +525,10 @@ class _AnalyticsContentState extends State<_AnalyticsContent>
           children: [
             Text(
               'Event Types',
-              style: AppTextStyles.h6.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+              style: AppTextStyles.h6.copyWith(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 24),
-            SizedBox(
-              height: 200,
-              child: _buildAnimatedDonutChart(),
-            ),
+            SizedBox(height: 200, child: _buildAnimatedDonutChart()),
           ],
         ),
       ),
@@ -560,18 +552,37 @@ class _AnalyticsContentState extends State<_AnalyticsContent>
       children: [
         Text(
           'Performance Insights',
-          style: AppTextStyles.h5.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+          style: AppTextStyles.h5.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 20),
         Row(
           children: [
-            Expanded(child: _buildPerformanceCard('Completion Rate', '87.3%', Icons.check_circle, AppColors.success)),
+            Expanded(
+              child: _buildPerformanceCard(
+                'Completion Rate',
+                '87.3%',
+                Icons.check_circle,
+                AppColors.success,
+              ),
+            ),
             const SizedBox(width: 16),
-            Expanded(child: _buildPerformanceCard('Avg. Rating', '4.6/5', Icons.star, AppColors.warning)),
+            Expanded(
+              child: _buildPerformanceCard(
+                'Avg. Rating',
+                '4.6/5',
+                Icons.star,
+                AppColors.warning,
+              ),
+            ),
             const SizedBox(width: 16),
-            Expanded(child: _buildPerformanceCard('Return Rate', '73.2%', Icons.repeat, AppColors.primary)),
+            Expanded(
+              child: _buildPerformanceCard(
+                'Return Rate',
+                '73.2%',
+                Icons.repeat,
+                AppColors.primary,
+              ),
+            ),
           ],
         ),
         const SizedBox(height: 20),
@@ -580,7 +591,12 @@ class _AnalyticsContentState extends State<_AnalyticsContent>
     );
   }
 
-  Widget _buildPerformanceCard(String title, String value, IconData icon, Color color) {
+  Widget _buildPerformanceCard(
+    String title,
+    String value,
+    IconData icon,
+    Color color,
+  ) {
     return ModernCard(
       child: Padding(
         padding: const EdgeInsets.all(20),
@@ -618,15 +634,17 @@ class _AnalyticsContentState extends State<_AnalyticsContent>
           children: [
             Text(
               'Detailed Metrics',
-              style: AppTextStyles.h6.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+              style: AppTextStyles.h6.copyWith(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 20),
             _buildMetricRow('Average Project Submissions', '156', 'per event'),
             _buildMetricRow('Team Formation Rate', '92%', 'of participants'),
             _buildMetricRow('Judge Satisfaction', '4.8/5', 'average rating'),
-            _buildMetricRow('Sponsor Engagement', '78%', 'active participation'),
+            _buildMetricRow(
+              'Sponsor Engagement',
+              '78%',
+              'active participation',
+            ),
           ],
         ),
       ),
@@ -638,20 +656,13 @@ class _AnalyticsContentState extends State<_AnalyticsContent>
       padding: const EdgeInsets.only(bottom: 16),
       child: Row(
         children: [
-          Expanded(
-            child: Text(
-              label,
-              style: AppTextStyles.bodyMedium,
-            ),
-          ),
+          Expanded(child: Text(label, style: AppTextStyles.bodyMedium)),
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
                 value,
-                style: AppTextStyles.h6.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
+                style: AppTextStyles.h6.copyWith(fontWeight: FontWeight.bold),
               ),
               Text(
                 subtitle,
@@ -740,7 +751,7 @@ class DonutChartPainter extends CustomPainter {
 
     for (final item in data) {
       final sweepAngle = (item['value'] as int) / 100 * 2 * 3.14159 * progress;
-      
+
       final paint = Paint()
         ..color = item['color'] as Color
         ..strokeWidth = strokeWidth
